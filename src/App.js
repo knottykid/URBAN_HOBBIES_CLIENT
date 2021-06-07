@@ -5,12 +5,16 @@ import Navbar from "./components/Navbar/Navbar";
 import HomePage from "./pages/HomePage";
 import LogIn from "./pages/LogIn";
 import ProtectedPage from "./pages/ProtectedPage";
+import HobbiesPage from "./pages/HobbiesPage";
 import Signup from "./pages/Signup";
+import AddHobby from "./pages/AddHobbyPage";
 import NormalRoute from "./routing-components/NormalRoute";
 import ProtectedRoute from "./routing-components/ProtectedRoute";
+import ProfilePage from "./pages/ProfilePage";
 import { getLoggedIn, logout } from "./services/auth";
 import * as PATHS from "./utils/paths";
 import * as CONSTS from "./utils/consts";
+import SingleHobby from "./pages/SingleHobby";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -66,6 +70,8 @@ export default function App() {
           authenticate={authenticate}
           component={Signup}
         />
+        <NormalRoute exact path={PATHS.HOBBIES_PAGE} component={HobbiesPage} />
+        <NormalRoute exact path={PATHS.SINGLE_HOBBY} component={SingleHobby} />
         <NormalRoute
           exact
           path={PATHS.LOGINPAGE}
@@ -77,6 +83,14 @@ export default function App() {
           path={PATHS.PROTECTEDPAGE}
           component={ProtectedPage}
           user={user}
+        />
+        <ProtectedRoute exact path={PATHS.ADD_HOBBY} component={AddHobby} />
+        <ProtectedRoute
+          exact
+          path={PATHS.PROFILE_PAGE}
+          component={ProfilePage}
+          user={user}
+          authenticate={authenticate}
         />
       </Switch>
     </div>
