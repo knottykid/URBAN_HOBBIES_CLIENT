@@ -6,10 +6,12 @@ import * as PATHS from "../utils/paths";
 
 export default function Signup({ authenticate, history }) {
   const [form, setForm] = useState({
+    name: "",
     username: "",
+    email: "",
     password: "",
   });
-  const { username, password } = form;
+  const { name, username, email, password } = form;
   const [error, setError] = useState(null);
 
   function handleInputChange(event) {
@@ -20,7 +22,9 @@ export default function Signup({ authenticate, history }) {
   function handleFormSubmission(event) {
     event.preventDefault();
     const credentials = {
+      name,
       username,
+      email,
       password,
     };
     signup(credentials).then((res) => {
@@ -42,16 +46,36 @@ export default function Signup({ authenticate, history }) {
     <div>
       <h1>Sign Up</h1>
       <form onSubmit={handleFormSubmission} className="auth__form">
+        {/* <label htmlFor="input-name">Name</label>
+        <input
+          id="input-name"
+          type="text"
+          name="name"
+          placeholder="Jane Doe"
+          value={name}
+          onChange={handleInputChange}
+          required
+        /> */}
         <label htmlFor="input-username">Username</label>
         <input
           id="input-username"
           type="text"
           name="username"
-          placeholder="Text"
+          placeholder="Username"
           value={username}
           onChange={handleInputChange}
           required
         />
+        {/* <label htmlFor="input-email">Email</label>
+        <input
+          id="input-email"
+          type="email"
+          name="email"
+          placeholder="email"
+          value={email}
+          onChange={handleInputChange}
+          required
+        /> */}
 
         <label htmlFor="input-password">Password</label>
         <input
@@ -67,7 +91,7 @@ export default function Signup({ authenticate, history }) {
 
         {error && (
           <div className="error-block">
-            <p>There was an error submiting the form:</p>
+            <p>There was an error submitting the form:</p>
             <p>{error.message}</p>
           </div>
         )}
