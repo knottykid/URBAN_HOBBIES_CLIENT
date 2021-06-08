@@ -12,17 +12,14 @@ const SingleHobby = (props) => {
   useEffect(() => {
     axios
       .get(`${CONST.SERVER_URL}/hobbies/${props.match.params.hobbyId}`)
-      .then((hobby) => {
-        console.log("response", hobby);
-        setHobby(hobby.data);
+      .then((response) => {
+        console.log("response", response);
+        setHobby(response.data);
       })
-      .catch(
-        (err) => {
-          console.log(err.response);
-        },
-        [props.match.params.hobbyId]
-      );
-  });
+      .catch((err) => {
+        console.log(err.response);
+      });
+  }, [props.match.params.hobbyId]);
 
   return (
     <div>
@@ -30,7 +27,7 @@ const SingleHobby = (props) => {
       <h1>{hobby.name}</h1>
       <h3>{hobby.description}</h3>
       <ul>
-        <lil>{hobby.members}</lil>
+        <li>{hobby.members}</li>
       </ul>
     </div>
   );

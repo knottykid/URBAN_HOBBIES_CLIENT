@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import UpdateProfile from "../components/profile/UpdateProfile";
 import UploadPic from "../components/profile/UploadPic";
+import ProfileForm from "../components/profile/ProfileForm";
 // import { UserContext, useUser } from "../context/User.context";
 
 export default function ProfilePage({ user, authenticate }) {
@@ -37,7 +38,9 @@ export default function ProfilePage({ user, authenticate }) {
         <br />
         <button onClick={profileToggle}>Upload Picture</button>
         <UploadPic user={user} authenticate={authenticate} />
-
+        <br />
+        <button onClick={profileToggle}>Fill out the Form</button>
+        <ProfileForm user={user} authenticate={authenticate} />
         <button>Delete Account</button>
       </div>
     </div>
