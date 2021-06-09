@@ -5,6 +5,14 @@ const profileService = axios.create({
   baseURL: `${CONSTS.SERVER_URL}/profile`,
 });
 
+export function FILL_FORM(body, token) {
+  return profileService.post("/profile", body, {
+    headers: {
+      authorization: token,
+    },
+  });
+}
+
 export function UPDATE_PROFILE(body, token) {
   return profileService.put(`/update`, body, {
     headers: {

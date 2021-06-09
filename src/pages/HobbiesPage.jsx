@@ -26,8 +26,8 @@ const HobbiesPage = () => {
         return (
           <section key={hobby._id}>
             <Link to={`${PATHS.HOBBIES_PAGE}/${hobby._id}`} style={{}}>
-              <h2>{hobby.name}</h2>
               <img src={hobby.image} alt="hobby" width="200" />
+              <h2>{hobby.name}</h2>
             </Link>
           </section>
         );

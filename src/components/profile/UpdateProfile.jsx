@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import * as PROFILE_SERVICE from "../../services/profile";
 import * as CONSTS from "../../utils/consts";
 
 function UpdateProfile(props) {
   const { user, authenticate } = props;
-  const [form, setForm] = React.useState({
+  const [form, setForm] = useState({
     username: user.username,
   });
 
@@ -37,7 +37,7 @@ function UpdateProfile(props) {
         />
       </div>
 
-      <button>Update das profile</button>
+      <button>Update Profile</button>
     </form>
   );
 }

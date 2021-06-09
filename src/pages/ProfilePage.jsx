@@ -2,13 +2,21 @@ import React, { useState } from "react";
 
 import UpdateProfile from "../components/profile/UpdateProfile";
 import UploadPic from "../components/profile/UploadPic";
-import ProfileForm from "../components/profile/ProfileForm";
+// import ProfileForm from "../components/profile/ProfileForm";
+import Form from "../components/profile/Form";
+import { makeStyles, Paper } from "@material-ui/core";
 // import { UserContext, useUser } from "../context/User.context";
 
+const useStyles = makeStyles((theme) => ({
+  pageContent: {
+    margin: theme.spacing(5),
+    padding: theme.spacing(3),
+  },
+}));
 export default function ProfilePage({ user, authenticate }) {
   const [displayUpdateProfile, setDisplayUpdateProfile] = useState(false);
   //   const [displayUpdatePassword, setDisplayUpdatePassword] = useState(false);
-
+  const classes = useStyles();
   function profileToggle() {
     setDisplayUpdateProfile(!displayUpdateProfile);
   }
@@ -39,8 +47,13 @@ export default function ProfilePage({ user, authenticate }) {
         <button onClick={profileToggle}>Upload Picture</button>
         <UploadPic user={user} authenticate={authenticate} />
         <br />
-        <button onClick={profileToggle}>Fill out the Form</button>
-        <ProfileForm user={user} authenticate={authenticate} />
+        {/* <button onClick={profileToggle}>Fill out the Form</button>
+        <ProfileForm user={user} authenticate={authenticate} /> */}
+
+        <Paper className={classes.pageContent}>
+          <Form />
+        </Paper>
+
         <button>Delete Account</button>
       </div>
     </div>
