@@ -7,6 +7,7 @@ import Controls from "../controls/Controls";
 
 import { useForm, ProForm } from "../forms/useForm";
 import * as neighborhoods from "../../services/neighborhoods";
+import HobbiesForm from "../forms/HobbiesForm";
 
 const genderItems = [
   { id: "male", title: "Male" },
@@ -63,21 +64,6 @@ const Form = ({ user, authenticate }) => {
             value={values.age}
             onChange={handleInputChange}
           />
-          <Controls.Input
-            name="postalCode"
-            label="Postal Code"
-            value={values.postalCode}
-            onChange={handleInputChange}
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <Controls.RadioGroup
-            name="gender"
-            label="Gender"
-            value={values.gender}
-            onChange={handleInputChange}
-            items={genderItems}
-          />
           <Controls.Select
             name="neighborhood"
             label="Neighborhood"
@@ -85,11 +71,24 @@ const Form = ({ user, authenticate }) => {
             onChange={handleInputChange}
             options={neighborhoods.getNeighborhoods()}
           />
-          <Controls.AutoComplete
+          <Controls.Input
+            name="postalCode"
+            label="Postal Code"
+            value={values.postalCode}
+            onChange={handleInputChange}
+          />
+          <HobbiesForm
             name="hobbies"
             label="Hobbies"
             value={values.hobbies}
             onChange={handleInputChange}
+          />
+          <Controls.RadioGroup
+            name="gender"
+            label="Gender"
+            value={values.gender}
+            onChange={handleInputChange}
+            items={genderItems}
           />
           <div>
             <Controls.Button type="submit" text="Submit" />
