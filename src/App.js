@@ -15,6 +15,8 @@ import { getLoggedIn, logout } from "./services/auth";
 import * as PATHS from "./utils/paths";
 import * as CONSTS from "./utils/consts";
 import SingleHobby from "./pages/SingleHobby";
+import JoinHobbyPage from "./pages/JoinHobbyPage";
+import AddHobbyPage from "./pages/AddHobbyPage";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -80,11 +82,25 @@ export default function App() {
         />
         <ProtectedRoute
           exact
+          path={PATHS.JOIN_HOBBY}
+          component={JoinHobbyPage}
+          user={user}
+          authenticate={authenticate}
+        />
+        <ProtectedRoute
+          exact
           path={PATHS.PROTECTEDPAGE}
           component={ProtectedPage}
           user={user}
+          authenticate={authenticate}
         />
-        <ProtectedRoute exact path={PATHS.ADD_HOBBY} component={AddHobby} />
+        <ProtectedRoute
+          exact
+          path={PATHS.ADD_HOBBY}
+          component={AddHobbyPage}
+          user={user}
+          authenticate={authenticate}
+        />
         <ProtectedRoute
           exact
           path={PATHS.PROFILE_PAGE}

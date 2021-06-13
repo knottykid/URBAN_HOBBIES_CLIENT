@@ -1,18 +1,69 @@
 import React, { useState } from "react";
 import { signup } from "../services/auth";
-import "./auth.css";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import {
+  makeStyles,
+  Container,
+  Typography,
+  Box,
+  Grid,
+  Link,
+  TextField,
+  CssBaseline,
+  Button,
+  Avatar,
+} from "@material-ui/core";
+
 import * as CONSTS from "../utils/consts";
 import * as PATHS from "../utils/paths";
 
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {"Copyright © "}
+      <Link color="inherit" href="https://material-ui.com/">
+        Urban Hobbies
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(3),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
+
 export default function Signup({ authenticate, history }) {
   const [form, setForm] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     username: "",
     email: "",
     password: "",
+    confirmPassword: "",
   });
-  const { name, username, email, password } = form;
+  const { firstName, lastName, username, email, password, confirmPassword } =
+    form;
   const [error, setError] = useState(null);
+
+  const classes = useStyles();
 
   function handleInputChange(event) {
     const { name, value } = event.target;
@@ -22,10 +73,12 @@ export default function Signup({ authenticate, history }) {
   function handleFormSubmission(event) {
     event.preventDefault();
     const credentials = {
-      name,
+      firstName,
+      lastName,
       username,
       email,
       password,
+      confirmPassword,
     };
     signup(credentials).then((res) => {
       if (!res.status) {
@@ -44,9 +97,124 @@ export default function Signup({ authenticate, history }) {
 
   return (
     <div>
-      <h1>Sign Up</h1>
-      <form onSubmit={handleFormSubmission} className="auth__form">
-        {/* <label htmlFor="input-name">Name</label>
+      {/* <h1>Sign Up</h1> */}
+
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign up
+          </Typography>
+          <form className={classes.form} onSubmit={handleFormSubmission}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  autoComplete="fname"
+                  name="firstName"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="firstName"
+                  label="First Name"
+                  value={firstName}
+                  onChange={handleInputChange}
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="lastName"
+                  label="Last Name"
+                  name="lastName"
+                  value={lastName}
+                  onChange={handleInputChange}
+                  autoComplete="lname"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="username"
+                  label="Username"
+                  name="username"
+                  value={username}
+                  onChange={handleInputChange}
+                  autoComplete="uname"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  value={email}
+                  onChange={handleInputChange}
+                  autoComplete="email"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={handleInputChange}
+                  autoComplete="current-password"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="confirmPassword"
+                  label="Repeat Password"
+                  type="password"
+                  id="password"
+                  value={confirmPassword}
+                  onChange={handleInputChange}
+                  autoComplete="current-password"
+                />
+              </Grid>
+            </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Sign Up
+            </Button>
+            <Grid container justify="flex-end">
+              <Grid item>
+                <Link href="/auth/login" variant="body2">
+                  Already have an account? Sign in
+                </Link>
+              </Grid>
+            </Grid>
+          </form>
+        </div>
+        <Box mt={5}>
+          <Copyright />
+        </Box>
+      </Container>
+      {/* <label htmlFor="input-name">Name</label>
         <input
           id="input-name"
           type="text"
@@ -55,7 +223,7 @@ export default function Signup({ authenticate, history }) {
           value={name}
           onChange={handleInputChange}
           required
-        /> */}
+        />
         <label htmlFor="input-username">Username</label>
         <input
           id="input-username"
@@ -66,16 +234,16 @@ export default function Signup({ authenticate, history }) {
           onChange={handleInputChange}
           required
         />
-        {/* <label htmlFor="input-email">Email</label>
+        <label htmlFor="input-email">Email</label>
         <input
           id="input-email"
           type="email"
           name="email"
-          placeholder="email"
+          placeholder="Email"
           value={email}
           onChange={handleInputChange}
           required
-        /> */}
+        />
 
         <label htmlFor="input-password">Password</label>
         <input
@@ -87,19 +255,18 @@ export default function Signup({ authenticate, history }) {
           onChange={handleInputChange}
           required
           minLength="8"
-        />
+        /> */}
 
-        {error && (
-          <div className="error-block">
-            <p>There was an error submitting the form:</p>
-            <p>{error.message}</p>
-          </div>
-        )}
+      {error && (
+        <div className="error-block">
+          <p>There was an error submitting the form:</p>
+          <p>{error.message}</p>
+        </div>
+      )}
 
-        <button className="button__submit" type="submit">
+      {/* <button className="button__submit" type="submit">
           Submit
-        </button>
-      </form>
+        </button> */}
     </div>
   );
 }

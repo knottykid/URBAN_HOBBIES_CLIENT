@@ -8,3 +8,4 @@ export const HOBBIES_PAGE = "/hobbies";
 export const ADD_HOBBY = `${HOBBIES_PAGE}/add`;
 
 export const SINGLE_HOBBY = `${HOBBIES_PAGE}/:hobbyId`;
+export const JOIN_HOBBY = `${SINGLE_HOBBY}/join`;

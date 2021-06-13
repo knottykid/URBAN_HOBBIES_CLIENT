@@ -1,39 +1,98 @@
 import { Grid } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import * as PROFILE_SERVICE from "../../services/profile";
 import * as CONSTS from "../../utils/consts";
-// import Control from "react-select/src/components/Control";
 import Controls from "../controls/Controls";
 
 import { useForm, ProForm } from "../forms/useForm";
 import * as neighborhoods from "../../services/neighborhoods";
-import HobbiesForm from "../forms/HobbiesForm";
+// import { user } from "../../../../server/routes/auth";
 
-const genderItems = [
-  { id: "male", title: "Male" },
-  { id: "Female", title: "Female" },
-  { id: "other", title: "Other" },
-];
+// const genderItems = [
+//   { id: "male", title: "Male" },
+//   { id: "Female", title: "Female" },
+//   { id: "other", title: "Other" },
+// ];
 
-const initialValues = {
-  fullName: "",
-  email: "",
-  gender: "",
-  age: Number,
-  location: "",
-  postalCode: Number,
-  neighborhood: "",
-  hobbies: "",
-  contacts: [],
-  //   isMember: false,
-};
+const Form = (props) => {
+  console.log(props);
+  const { user, authenticate } = props;
+  console.log("WHAT?:", authenticate);
+  const [newForm, setNewForm] = useState({
+    username: user.username,
+    // email: "",
+    gender: "",
+    age: "",
+    // location: "Berlin",
+    postalCode: "",
+    neighborhood: "",
+    hobbies: [],
+    contacts: [],
+  });
 
-const Form = ({ user, authenticate }) => {
-  const { values, handleInputChange } = useForm(initialValues);
+  // const initialValues = {
+  //   username: "",
+  //   // email: "",
+  //   gender: "male",
+  //   age: "",
+  //   // location: "Berlin",
+  //   postalCode: "",
+  //   neighborhood: "",
+  //   hobbies: "",
+  //   contacts: [],
+  //   //   isMember: false,
+  // };
+  // const validate = (fieldValues = values) => {
+  //   let temp = { ...errors };
+  //   // if ("username" in fieldValues)
+  //   //   temp.username = fieldValues.username ? "" : "This field is required";
+  //   // temp.email = /$ˆ|.+@.}..}/.test(fieldValues.email) ? "" : "Email is not valid";
+  //    temp.age = fieldValues.age ? "" : "This field is required";
+  //    temp.postalCode =
+  //      fieldValues.postalCode.length > 4 ? "" : "Minimum 5 numbers required";
+  //   if ("neighborhood" in fieldValues)
+  //     temp.neighborhood =
+  //       fieldValues.neighborhood.length !== 0 ? "" : "This field is required";
+  //   if ("hobbies" in fieldValues)
+  //     temp.hobbies =
+  //       fieldValues.hobbies.length !== 0 ? "" : "This field is required";
+  //   setErrors({
+  //     ...temp,
+  //   });
+
+  //   if (fieldValues === values)
+  //     return Object.values(temp).every((x) => x === "");
+  // };
+
+  // const { values, setValues, errors, setErrors, handleInputChange, resetForm } =
+  //   useForm(initialValues, true, validate);
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+  //   if (validate())
+  //     //! profileService.instert(values)
+  //     resetForm();
+
+  //   // if (validate())
+  //   // window.alert("testing...");
+  //   // const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
+  //   // PROFILE_SERVICE.FILL_FORM(values, accessToken)
+  //   //   .then((response) => {
+  //   //     console.log("response:", response);
+  //   //     authenticate(response.data.user);
+  //   //   })
+  //   //   .catch((err) => {
+  //   //     console.error(err);
+  //   //   });
+  // }
+
+  function handleChange(event) {
+    setNewForm({ ...newForm, [event.target.name]: event.target.value });
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
     const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
-    PROFILE_SERVICE.FILL_FORM(values, accessToken)
+    PROFILE_SERVICE.UPDATE_PROFILE(newForm, accessToken)
       .then((response) => {
         console.log("response:", response);
         authenticate(response.data.user);
@@ -42,54 +101,59 @@ const Form = ({ user, authenticate }) => {
         console.error(err);
       });
   }
+
   return (
     <ProForm onSubmit={handleSubmit}>
       <Grid container>
         <Grid item xs={6}>
           <Controls.Input
-            name="fullName"
-            label="Full Name"
-            value={values.fullName}
-            onChange={handleInputChange}
+            name="username"
+            label="username"
+            value={newForm.username}
+            onChange={handleChange}
+            // error={errors.userName}
           />
-          <Controls.Input
-            label="Email"
-            name="email"
-            value={values.email}
-            onChange={handleInputChange}
-          />
+
           <Controls.Input
             name="age"
             label="Age"
-            value={values.age}
-            onChange={handleInputChange}
+            value={newForm.age}
+            onChange={handleChange}
           />
+          {/* <Controls.RadioGroup
+            name="gender"
+            label="Gender"
+            value={newForm.gender}
+            onChange={handleChange}
+          /> */}
           <Controls.Select
             name="neighborhood"
             label="Neighborhood"
-            value={values.neighborhood}
-            onChange={handleInputChange}
+            value={newForm.neighborhood}
+            onChange={handleChange}
             options={neighborhoods.getNeighborhoods()}
+            // error={errors.neighborhood}
           />
           <Controls.Input
             name="postalCode"
             label="Postal Code"
-            value={values.postalCode}
-            onChange={handleInputChange}
+            value={newForm.postalCode}
+            onChange={handleChange}
           />
-          <HobbiesForm
+          <Controls.AutoComplete
             name="hobbies"
             label="Hobbies"
-            value={values.hobbies}
-            onChange={handleInputChange}
+            value={newForm.hobbies}
+            onChange={handleChange}
+            // error={errors.hobbies}
           />
-          <Controls.RadioGroup
+          {/* <Controls.RadioGroup
             name="gender"
             label="Gender"
             value={values.gender}
             onChange={handleInputChange}
             items={genderItems}
-          />
+          /> */}
           <div>
             <Controls.Button type="submit" text="Submit" />
             <Controls.Button text="Reset" color="default" />

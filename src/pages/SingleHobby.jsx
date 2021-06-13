@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import * as CONST from "../utils/consts";
-
+import * as HOBBIES_SERVICE from "../services/hobbies";
+import { Link } from "react-router-dom";
+import * as PATHS from "../utils/paths";
 const SingleHobby = (props) => {
+  const { user, authenticate } = props;
   const [hobby, setHobby] = useState({});
 
   //   const showHobby = (hob) => {
@@ -21,14 +24,30 @@ const SingleHobby = (props) => {
       });
   }, [props.match.params.hobbyId]);
 
+  const handleSubmission = (e) => {
+    e.preventDefault();
+    const accessToken = localStorage.getItem(CONST.ACCESS_TOKEN);
+    HOBBIES_SERVICE.JOIN_HOBBY(hobby, accessToken)
+      .then((response) => {
+        console.log("response:", response);
+        authenticate(response.data.user);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
   return (
     <div>
       <img src={hobby.image} alt="hobby" />
       <h1>{hobby.name}</h1>
       <h3>{hobby.description}</h3>
-      <ul>
+      <Link to={`${PATHS.JOIN_HOBBY}`} style={{}}>
+        Join
+      </Link>
+
+      {/* <ul>
         <li>{hobby.members}</li>
-      </ul>
+      </ul> */}
     </div>
   );
 };
