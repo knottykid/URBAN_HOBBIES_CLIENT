@@ -32,8 +32,8 @@ const HobbiesPage = ({ user }) => {
 
   return (
     <>
+      <Link to={PATHS.ADD_HOBBY}>Add One</Link>
       <Card className={classes.card} raise elevation={6}>
-        <Link to={PATHS.ADD_HOBBY}>Add One</Link>
         <Grid
           className={classes.container}
           container
@@ -55,6 +55,7 @@ const HobbiesPage = ({ user }) => {
 
                 <h3 style={{ textAlign: "center" }}>{hobby.name}</h3>
               </Link>
+
               {/* <div className={classes.overlay}>
                 <Typography variant="h6">{hobby.name}</Typography>
               </div> */}

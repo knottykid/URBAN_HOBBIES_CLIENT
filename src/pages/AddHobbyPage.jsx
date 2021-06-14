@@ -1,24 +1,37 @@
 import React, { useState } from "react";
 import * as CONST from "../utils/consts";
+import * as PATHS from "../utils/paths";
 import * as HOBBIES_SERVICE from "../services/hobbies";
 
-const AddHobbyPage = ({ user, authenticate }) => {
-  const [myHobbies, setMyHobbies] = useState([user.hobbies]);
+const primaryValues = [
+  {
+    name: "",
+    description: "",
+    image: "",
+    neighborhood: "",
+    postalCode: "",
+  },
+];
+
+const AddHobbyPage = (props) => {
+  const [newHobby, setNewHobby] = useState(primaryValues);
 
   const handleChange = (e) => {
-    setMyHobbies({ ...myHobbies, [e.target.name]: e.target.value });
+    setNewHobby({ ...newHobby, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const accessToken = localStorage.getItem(CONST.ACCESS_TOKEN);
-    HOBBIES_SERVICE.ADD_HOBBY(myHobbies, accessToken)
+    HOBBIES_SERVICE.ADD_HOBBY(newHobby, accessToken)
       .then((response) => {
-        console.log("RESP", response);
-        authenticate(response.data.user);
+        console.log("response:", response);
+        props.history.push(
+          `${PATHS.HOBBIES_PAGE}/${response.data.hobbies._id}`
+        );
       })
       .catch((error) => {
-        console.log(error);
+        console.log("JOJO:", error.response);
       });
   };
 
@@ -27,33 +40,41 @@ const AddHobbyPage = ({ user, authenticate }) => {
       <form onSubmit={handleSubmit}>
         <label>Hobby</label>
         <input
-          name={myHobbies.name}
+          name={newHobby.name}
           placeholder="New Hobby"
-          value={myHobbies.name}
+          value={newHobby.name}
           onChange={handleChange}
         />
         <br />
         <label>Description</label>
         <input
-          name={myHobbies.description}
+          name={newHobby.description}
           placeholder="what is it about?"
-          value={myHobbies.description}
+          value={newHobby.description}
+          onChange={handleChange}
+        />
+        <label>Image</label>
+        <input
+          name={newHobby.image}
+          placeholder="One image say more than 1000 words"
+          type="file"
+          value={newHobby.image}
           onChange={handleChange}
         />
         <br />
         <label>Neighborhood</label>
         <input
-          name={myHobbies.neighborhood}
+          name={newHobby.neighborhood}
           placeholder="Boyz in Da Hood"
-          value={myHobbies.neighborhood}
+          value={newHobby.neighborhood}
           onChange={handleChange}
         />
         <br />
         <label>Postal Code</label>
         <input
-          name={myHobbies.postalCode}
+          name={newHobby.postalCode}
           placeholder="PLZ"
-          value={myHobbies.postalCode}
+          value={newHobby.postalCode}
           onChange={handleChange}
         />
         <br />

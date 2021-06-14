@@ -84,8 +84,6 @@ export default function App() {
           exact
           path={PATHS.JOIN_HOBBY}
           component={JoinHobbyPage}
-          user={user}
-          authenticate={authenticate}
         />
         <ProtectedRoute
           exact
@@ -94,13 +92,7 @@ export default function App() {
           user={user}
           authenticate={authenticate}
         />
-        <ProtectedRoute
-          exact
-          path={PATHS.ADD_HOBBY}
-          component={AddHobbyPage}
-          user={user}
-          authenticate={authenticate}
-        />
+        <ProtectedRoute exact path={PATHS.ADD_HOBBY} component={AddHobby} />
         <ProtectedRoute
           exact
           path={PATHS.PROFILE_PAGE}

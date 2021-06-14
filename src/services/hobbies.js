@@ -19,7 +19,7 @@ export function ADD_HOBBY(body, token) {
 }
 
 export function JOIN_HOBBY(body, token) {
-  return hobbyService.post("/join", body, {
+  return hobbyService.get("/join", body, {
     headers: { authorization: token },
   });
 }
