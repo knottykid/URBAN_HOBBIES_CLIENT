@@ -91,14 +91,12 @@ export default function Signup({ authenticate, history }) {
       // successful signup
       localStorage.setItem(CONSTS.ACCESS_TOKEN, res.data.accessToken);
       authenticate(res.data.user);
-      history.push(PATHS.HOMEPAGE);
+      history.push(PATHS.PROFILE_PAGE);
     });
   }
 
   return (
     <div>
-      {/* <h1>Sign Up</h1> */}
-
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
@@ -214,48 +212,6 @@ export default function Signup({ authenticate, history }) {
           <Copyright />
         </Box>
       </Container>
-      {/* <label htmlFor="input-name">Name</label>
-        <input
-          id="input-name"
-          type="text"
-          name="name"
-          placeholder="Jane Doe"
-          value={name}
-          onChange={handleInputChange}
-          required
-        />
-        <label htmlFor="input-username">Username</label>
-        <input
-          id="input-username"
-          type="text"
-          name="username"
-          placeholder="Username"
-          value={username}
-          onChange={handleInputChange}
-          required
-        />
-        <label htmlFor="input-email">Email</label>
-        <input
-          id="input-email"
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={email}
-          onChange={handleInputChange}
-          required
-        />
-
-        <label htmlFor="input-password">Password</label>
-        <input
-          id="input-password"
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={password}
-          onChange={handleInputChange}
-          required
-          minLength="8"
-        /> */}
 
       {error && (
         <div className="error-block">
@@ -263,10 +219,6 @@ export default function Signup({ authenticate, history }) {
           <p>{error.message}</p>
         </div>
       )}
-
-      {/* <button className="button__submit" type="submit">
-          Submit
-        </button> */}
     </div>
   );
 }

@@ -3,42 +3,54 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 import * as PATHS from "../../utils/paths";
 import * as CONSTS from "../../utils/consts";
+import { AppBar, Avatar, Button, Toolbar, Typography } from "@material-ui/core";
+import useStyles from "./styles";
 
 const Navbar = (props) => {
+  const classes = useStyles();
+
   return (
-    <nav>
-      <Link to={PATHS.HOMEPAGE} className="nav__projectName">
+    <AppBar className={classes.appBar} position="static" color="inherit">
+      <Link to={PATHS.HOMEPAGE} className={classes.brandContainer}>
         {CONSTS.CAPITALIZED_APP}
       </Link>
-
-      <div className="nav__authLinks">
+      <Toolbar className={classes.toolbar}>
         {props.user ? (
-          <>
-            <Link to={PATHS.PROTECTEDPAGE} className="authLink">
-              Protected Page
-            </Link>
-            <Link to={PATHS.PROFILE_PAGE} className="authLink">
-              Profile
-            </Link>
-            <Link to={PATHS.HOBBIES_PAGE} className="authLink">
-              Hobbies
-            </Link>
-            <button className="nav-logoutbtn" onClick={props.handleLogout}>
+          <div className={classes.profile}>
+            <Avatar
+              className={classes.purple}
+              alt={props.user?.username}
+              src={props.user?.profilePic}
+              component={Link}
+              to="/profile"
+            >
+              {props.user?.username.charAt(0)}
+            </Avatar>
+            <Typography className={classes.userName} variant="h6">
+              {props.user?.username}
+            </Typography>
+
+            <Button
+              variant="contained"
+              className={classes.logout}
+              color="secondary"
+              onClick={props.handleLogout}
+            >
               Logout
-            </button>
-          </>
+            </Button>
+          </div>
         ) : (
-          <>
-            <Link to={PATHS.SIGNUPPAGE} className="authLink">
-              Signup
-            </Link>
-            <Link to={PATHS.LOGINPAGE} className="authLink">
-              Log In
-            </Link>
-          </>
+          <Button
+            component={Link}
+            to="/auth/login"
+            variant="contained"
+            color="primary"
+          >
+            Sign In
+          </Button>
         )}
-      </div>
-    </nav>
+      </Toolbar>
+    </AppBar>
   );
 };
 

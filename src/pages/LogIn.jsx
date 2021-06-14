@@ -80,7 +80,7 @@ export default function LogIn({ authenticate, history }) {
       }
       localStorage.setItem(CONSTS.ACCESS_TOKEN, res.data.accessToken);
       authenticate(res.data.user);
-      history.push(PATHS.HOMEPAGE);
+      history.push(PATHS.PROFILE_PAGE);
     });
   }
 

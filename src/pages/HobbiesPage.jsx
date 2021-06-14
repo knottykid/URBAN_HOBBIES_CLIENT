@@ -1,11 +1,22 @@
 import React, { useState, useEffect } from "react";
+
 import axios from "axios";
+import {
+  ButtonBase,
+  Card,
+  CardMedia,
+  Grid,
+  Typography,
+} from "@material-ui/core";
+
 import { Link } from "react-router-dom";
 import * as PATHS from "../utils/paths";
 import * as CONST from "../utils/consts";
+import useStyles from "../components/hobbies/styles";
 
-const HobbiesPage = () => {
+const HobbiesPage = ({ user }) => {
   const [listOfHobbies, setListOfHobbies] = useState([]);
+  const classes = useStyles();
 
   useEffect(() => {
     axios
@@ -20,9 +31,45 @@ const HobbiesPage = () => {
   }, []);
 
   return (
-    <div>
-      <Link to={PATHS.ADD_HOBBY}>Add One</Link>
-      {listOfHobbies.map((hobby) => {
+    <>
+      <Card className={classes.card} raise elevation={6}>
+        <Link to={PATHS.ADD_HOBBY}>Add One</Link>
+        <Grid
+          className={classes.container}
+          container
+          alignItems="stretch"
+          spacing={3}
+        >
+          {listOfHobbies.map((hobby) => (
+            <Grid key={hobby._id} item xs={12} sm={12} md={3} lg={3}>
+              {/* <Link to={`${PATHS.HOBBIES_PAGE}/${hobby._id}`} style={{}}>
+              <img src={hobby.image} alt="hobby" width="200" />
+              <h2>{hobby.name}</h2>
+            </Link> */}
+              <Link to={`${PATHS.HOBBIES_PAGE}/${hobby._id}`} style={{}}>
+                <CardMedia
+                  className={classes.media}
+                  image={hobby.image}
+                  title={hobby.name}
+                />
+
+                <h3 style={{ textAlign: "center" }}>{hobby.name}</h3>
+              </Link>
+              {/* <div className={classes.overlay}>
+                <Typography variant="h6">{hobby.name}</Typography>
+              </div> */}
+              {/* < hobbies={hobby} setCurrentId={setCurrentId} /> */}
+              <ButtonBase
+                component="span"
+                name="test"
+                className={classes.cardAction}
+                link={`${PATHS.HOBBIES_PAGE}/${hobby._id}`}
+              ></ButtonBase>
+            </Grid>
+          ))}
+        </Grid>
+      </Card>
+      {/* {listOfHobbies.map((hobby) => {
         return (
           <section key={hobby._id}>
             <Link to={`${PATHS.HOBBIES_PAGE}/${hobby._id}`} style={{}}>
@@ -31,8 +78,8 @@ const HobbiesPage = () => {
             </Link>
           </section>
         );
-      })}
-    </div>
+      })} */}
+    </>
   );
 };
 

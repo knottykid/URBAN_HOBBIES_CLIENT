@@ -24,6 +24,20 @@ const SingleHobby = (props) => {
       });
   }, [props.match.params.hobbyId]);
 
+  useEffect(() => {
+    axios
+      .post(`${CONST.SERVER_URL}/hobbies/${props.match.params.hobbyId}/join`, {
+        user,
+      })
+      .then((response) => {
+        console.log("WHATDUP:", response.data.user);
+        setHobby(response.data.user);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  }, [props.match.params.hobbyId, user]);
+
   const handleSubmission = (e) => {
     e.preventDefault();
     const accessToken = localStorage.getItem(CONST.ACCESS_TOKEN);
@@ -41,9 +55,9 @@ const SingleHobby = (props) => {
       <img src={hobby.image} alt="hobby" />
       <h1>{hobby.name}</h1>
       <h3>{hobby.description}</h3>
-      <Link to={`${PATHS.JOIN_HOBBY}`} style={{}}>
+      <button onSubmit={handleSubmission} onClick={() => hobby}>
         Join
-      </Link>
+      </button>
 
       {/* <ul>
         <li>{hobby.members}</li>

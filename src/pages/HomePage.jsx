@@ -1,7 +1,8 @@
-import "../App.css";
+import React from "react";
+import HobbiesPage from "./HobbiesPage";
 
 function HomePage() {
-  return <div className="App"></div>;
+  return <HobbiesPage />;
 }
 
 export default HomePage;
