@@ -7,7 +7,7 @@ import LogIn from "./pages/LogIn";
 import ProtectedPage from "./pages/ProtectedPage";
 import HobbiesPage from "./pages/HobbiesPage";
 import Signup from "./pages/Signup";
-import AddHobby from "./pages/AddHobbyPage";
+import AddHobbyPage from "./pages/AddHobbyPage";
 import NormalRoute from "./routing-components/NormalRoute";
 import ProtectedRoute from "./routing-components/ProtectedRoute";
 import ProfilePage from "./pages/ProfilePage";
@@ -16,7 +16,6 @@ import * as PATHS from "./utils/paths";
 import * as CONSTS from "./utils/consts";
 import SingleHobby from "./pages/SingleHobby";
 import JoinHobbyPage from "./pages/JoinHobbyPage";
-import AddHobbyPage from "./pages/AddHobbyPage";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -73,7 +72,7 @@ export default function App() {
           component={Signup}
         />
         <NormalRoute exact path={PATHS.HOBBIES_PAGE} component={HobbiesPage} />
-        <NormalRoute exact path={PATHS.SINGLE_HOBBY} component={SingleHobby} />
+
         <NormalRoute
           exact
           path={PATHS.LOGINPAGE}
@@ -92,7 +91,12 @@ export default function App() {
           user={user}
           authenticate={authenticate}
         />
-        <ProtectedRoute exact path={PATHS.ADD_HOBBY} component={AddHobby} />
+        <ProtectedRoute
+          exact
+          user={user}
+          path={PATHS.ADD_HOBBY}
+          component={AddHobbyPage}
+        />
         <ProtectedRoute
           exact
           path={PATHS.PROFILE_PAGE}
@@ -100,6 +104,7 @@ export default function App() {
           user={user}
           authenticate={authenticate}
         />
+        <NormalRoute exact path={PATHS.SINGLE_HOBBY} component={SingleHobby} />
       </Switch>
     </div>
   );

@@ -6,13 +6,8 @@ import Controls from "../controls/Controls";
 
 import { useForm, ProForm } from "../forms/useForm";
 import * as neighborhoods from "../../services/neighborhoods";
-// import { user } from "../../../../server/routes/auth";
-
-// const genderItems = [
-//   { id: "male", title: "Male" },
-//   { id: "Female", title: "Female" },
-//   { id: "other", title: "Other" },
-// ];
+import * as hobbies from "../../services/testing";
+import Asynchronous from "../controls/Testing";
 
 const Form = (props) => {
   console.log(props);
@@ -72,26 +67,15 @@ const Form = (props) => {
   //     //! profileService.instert(values)
   //     resetForm();
 
-  //   // if (validate())
-  //   // window.alert("testing...");
-  //   // const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
-  //   // PROFILE_SERVICE.FILL_FORM(values, accessToken)
-  //   //   .then((response) => {
-  //   //     console.log("response:", response);
-  //   //     authenticate(response.data.user);
-  //   //   })
-  //   //   .catch((err) => {
-  //   //     console.error(err);
-  //   //   });
-  // }
-
   function handleChange(event) {
+    console.log(">> " + event.target.name + ">>" + event.target.value);
     setNewForm({ ...newForm, [event.target.name]: event.target.value });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
     const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
+    console.log("LOOK AT ME:", newForm.hobbies);
     PROFILE_SERVICE.UPDATE_PROFILE(newForm, accessToken)
       .then((response) => {
         console.log("response:", response);
@@ -140,11 +124,30 @@ const Form = (props) => {
             value={newForm.postalCode}
             onChange={handleChange}
           />
-          <Controls.AutoComplete
+
+          <Asynchronous />
+
+          {/* <input
             name="hobbies"
             label="Hobbies"
             value={newForm.hobbies}
             onChange={handleChange}
+          />
+
+          <Controls.Select
+            name="hobbies"
+            label="Hobbies"
+            value={newForm.hobbies}
+            onChange={handleChange}
+            options={hobbies.Testing()}
+            // error={errors.neighborhood}
+          /> */}
+          <Controls.AutoComplete
+            name="hobbies"
+            label="Hobbies"
+            value={newForm.hobbies}
+            onChange={(e) => setNewForm({ ...newForm, hobbies: e })}
+
             // error={errors.hobbies}
           />
           {/* <Controls.RadioGroup

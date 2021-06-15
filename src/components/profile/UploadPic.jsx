@@ -29,6 +29,7 @@ const UploadPic = ({ user, setUser }) => {
     const image = e.target.files[0];
     setPicture(image);
   }
+
   return (
     <div>
       <form onSubmit={handleFormSubmit}>

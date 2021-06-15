@@ -14,6 +14,7 @@ export function FILL_FORM(body, token) {
 }
 
 export function UPDATE_PROFILE(body, token) {
+  console.log("BLACKLABEL", body);
   return profileService.put(`/update`, body, {
     headers: {
       authorization: token,

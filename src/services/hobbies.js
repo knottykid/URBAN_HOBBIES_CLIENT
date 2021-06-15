@@ -10,6 +10,7 @@ export function GET_HOBBIES(body, token) {
     headers: { authorization: token },
   });
 }
+
 export function ADD_HOBBY(body, token) {
   return hobbyService.post("/add", body, {
     headers: {

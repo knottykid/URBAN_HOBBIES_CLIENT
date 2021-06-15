@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Autocomplete } from "@material-ui/lab/";
 import axios from "axios";
 import * as CONST from "../../utils/consts";
+
 import { TextField } from "@material-ui/core";
 
-const HobbiesForm = () => {
+const HobbiesForm = ({ onChange }) => {
   const [allHobbies, setAllHobbies] = useState([]);
+  const [newHobbies, setNewHobbies] = useState([]);
 
   useEffect(() => {
     axios
@@ -20,23 +22,33 @@ const HobbiesForm = () => {
     return () => console.log("Schuss");
   }, []);
 
+  const handleChange = (e, newValue) => {
+    console.dir(e);
+    console.log(newValue);
+    setNewHobbies(newValue);
+    onChange(newValue);
+  };
+
+  console.log("NEW STATE: ", newHobbies);
+
   return (
-    <div>
-      <Autocomplete
-        multiple
-        id="urban-hobbies"
-        freeSolo
-        options={allHobbies.map((option) => option.name)}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Hobbies"
-            margin="normal"
-            variant="outlined"
-          />
-        )}
-      />
-    </div>
+    <Autocomplete
+      debug={true}
+      multiple
+      id="urban-hobbies"
+      freeSolo
+      onChange={handleChange}
+      options={allHobbies.map((option) => option.name)}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          name="hobbies"
+          label="Hobbies"
+          margin="normal"
+          variant="outlined"
+        />
+      )}
+    />
   );
 };
 

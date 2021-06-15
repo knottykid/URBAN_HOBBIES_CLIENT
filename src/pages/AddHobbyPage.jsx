@@ -35,6 +35,8 @@ const AddHobbyPage = (props) => {
       });
   };
 
+  console.log("running! ");
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
