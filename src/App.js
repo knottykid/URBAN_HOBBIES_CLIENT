@@ -4,7 +4,7 @@ import LoadingComponent from "./components/Loading";
 import Navbar from "./components/Navbar/Navbar";
 import HomePage from "./pages/HomePage";
 import LogIn from "./pages/LogIn";
-import ProtectedPage from "./pages/ProtectedPage";
+
 import HobbiesPage from "./pages/HobbiesPage";
 import Signup from "./pages/Signup";
 import AddHobbyPage from "./pages/AddHobbyPage";
@@ -16,6 +16,7 @@ import * as PATHS from "./utils/paths";
 import * as CONSTS from "./utils/consts";
 import SingleHobby from "./pages/SingleHobby";
 import JoinHobbyPage from "./pages/JoinHobbyPage";
+// import UserPage from "./pages/UserPage";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -44,7 +45,6 @@ export default function App() {
     setIsLoading(true);
     logout(accessToken).then((res) => {
       if (!res.status) {
-        // deal with error here
         console.error("Logout was unsuccessful: ", res);
       }
       localStorage.removeItem(CONSTS.ACCESS_TOKEN);
@@ -62,7 +62,12 @@ export default function App() {
   }
   return (
     <div className="App">
-      <Navbar handleLogout={handleLogout} user={user} />
+      <Navbar
+        handleLogout={handleLogout}
+        user={user}
+        authenticate={authenticate}
+        setUser={setUser}
+      />
       <Switch>
         <NormalRoute exact path={PATHS.HOMEPAGE} component={HomePage} />
         <NormalRoute
@@ -84,25 +89,27 @@ export default function App() {
           path={PATHS.JOIN_HOBBY}
           component={JoinHobbyPage}
         />
-        <ProtectedRoute
+        {/* <ProtectedRoute
           exact
-          path={PATHS.PROTECTEDPAGE}
-          component={ProtectedPage}
+          path={PATHS.SINGLE_USER}
+          component={UserPage}
           user={user}
           authenticate={authenticate}
-        />
-        <ProtectedRoute
+          setUser={setUser}
+        /> */}
+        {/* <ProtectedRoute
           exact
           user={user}
           path={PATHS.ADD_HOBBY}
           component={AddHobbyPage}
-        />
+        /> */}
         <ProtectedRoute
           exact
           path={PATHS.PROFILE_PAGE}
           component={ProfilePage}
           user={user}
           authenticate={authenticate}
+          setUser={setUser}
         />
         <NormalRoute exact path={PATHS.SINGLE_HOBBY} component={SingleHobby} />
       </Switch>

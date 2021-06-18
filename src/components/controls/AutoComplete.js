@@ -13,7 +13,6 @@ const HobbiesForm = ({ onChange }) => {
     axios
       .get(`${CONST.SERVER_URL}/hobbies`)
       .then((response) => {
-        console.log("PARAMS:", response.data);
         setAllHobbies(response.data);
       })
       .catch((error) => {
@@ -28,8 +27,6 @@ const HobbiesForm = ({ onChange }) => {
     setNewHobbies(newValue);
     onChange(newValue);
   };
-
-  console.log("NEW STATE: ", newHobbies);
 
   return (
     <Autocomplete

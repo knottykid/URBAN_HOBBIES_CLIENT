@@ -1,7 +1,7 @@
 export const HOMEPAGE = "/";
 export const SIGNUPPAGE = "/auth/signup";
 export const LOGINPAGE = "/auth/login";
-export const PROTECTEDPAGE = "/protected";
+// export const PROTECTEDPAGE = "/protected";
 export const PROFILE_PAGE = "/profile";
 export const SINGLE_USER = `/:username`;
 export const HOBBIES_PAGE = "/hobbies";

@@ -7,7 +7,6 @@ const UploadPic = ({ user, setUser }) => {
   function handleFormSubmit(e) {
     e.preventDefault();
     if (!picture) {
-      console.log("you forgot to pick a picture");
       return;
     }
     const formBody = new window.FormData();

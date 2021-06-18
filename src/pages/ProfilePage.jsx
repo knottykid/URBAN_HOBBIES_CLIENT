@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-
-import UpdateProfile from "../components/profile/UpdateProfile";
 import UploadPic from "../components/profile/UploadPic";
-// import ProfileForm from "../components/profile/ProfileForm";
-import Form from "../components/profile/Form";
-import { makeStyles, Paper } from "@material-ui/core";
-// import { UserContext, useUser } from "../context/User.context";
 
+import Form from "../components/profile/Form";
+import { IconButton, makeStyles, Paper, Tooltip } from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
+import DeleteProfile from "../components/profile/DeleteProfile";
+import PersonPinIcon from "@material-ui/icons/PersonPin";
+import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 const useStyles = makeStyles((theme) => ({
   pageContent: {
     margin: theme.spacing(5),
@@ -15,14 +15,24 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
 }));
-export default function ProfilePage({ user, authenticate }) {
+export default function ProfilePage({ user, authenticate, setUser }) {
   const [displayUpdateProfile, setDisplayUpdateProfile] = useState(false);
   //   const [displayUpdatePassword, setDisplayUpdatePassword] = useState(false);
+  const [picture, setPicture] = useState(false);
+  const [deleteUser, setDeleteUser] = useState(false);
+
   const classes = useStyles();
   function profileToggle() {
     setDisplayUpdateProfile(!displayUpdateProfile);
   }
 
+  function pictureToggle() {
+    setPicture(!picture);
+  }
+
+  function deleteToggle() {
+    setDeleteUser(!deleteUser);
+  }
   //   function passwordToggle() {
   //     setDisplayUpdatePassword(!displayUpdatePassword);
   //   }
@@ -44,25 +54,39 @@ export default function ProfilePage({ user, authenticate }) {
         <h3>Gender: {user.gender}</h3>
         <h3>Hood: {user.neighborhood}</h3>
         <h3>PLZ: {user.postalCode}</h3>
-        <h3>Hobbies:{user.hobbies}</h3>
+        <h3>Hobbies:{user.hobbies.join(", ")}</h3>
       </Paper>
       <div>
-        <button onClick={profileToggle}>Update profile</button>
-
+        <Tooltip title="Update">
+          <IconButton aria-label="person" onClick={profileToggle}>
+            <PersonPinIcon fontSize="large" />
+            Update your profile{" "}
+          </IconButton>
+        </Tooltip>
         {/* {displayUpdateProfile ? <UpdateProfile /> : null} */}
         {displayUpdateProfile && (
           <Paper className={classes.pageContent}>
             <Form user={user} authenticate={authenticate} />
           </Paper>
         )}
-        <br />
-        <button onClick={profileToggle}>Upload Picture</button>
-        <UploadPic user={user} authenticate={authenticate} />
-        <br />
-        {/* <button onClick={profileToggle}>Fill out the Form</button>
-        <ProfileForm user={user} authenticate={authenticate} /> */}
 
-        <button>Delete Account</button>
+        <Tooltip title="Photo">
+          <IconButton aria-label="photo" onClick={pictureToggle}>
+            <AddAPhotoIcon fontSize="large" />
+            Upload a new Profile Pic
+          </IconButton>
+        </Tooltip>
+        {picture && <UploadPic user={user} setUser={setUser} />}
+
+        <Tooltip title="Delete">
+          <IconButton aria-label="delete" onClick={deleteToggle}>
+            <DeleteIcon fontSize="large" />
+            Delete Account
+          </IconButton>
+        </Tooltip>
+        {deleteUser && (
+          <DeleteProfile user={user} authenticate={authenticate} />
+        )}
       </div>
     </div>
   );

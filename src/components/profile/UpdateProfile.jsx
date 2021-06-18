@@ -6,15 +6,7 @@ function UpdateProfile(props) {
   const { user, authenticate } = props;
   const [form, setForm] = useState({
     username: user.username,
-    // fullName: user.name,
-    // email: "",
-    gender: "male",
-    age: "",
-    location: "Berlin",
-    postalCode: "",
-    neighborhood: "",
-    hobbies: [],
-    contacts: [],
+    fullName: user.name,
   });
 
   function handleChange(event) {
@@ -44,34 +36,10 @@ function UpdateProfile(props) {
           value={form.username}
           onChange={handleChange}
         />
-        {/* <input
-          name="name"
-          placeholder="name"
+        <input
+          name="fullName"
+          placeholder="Full Name"
           value={form.name}
-          onChange={handleChange}
-        /> */}
-        <input
-          name="age"
-          placeholder="Age"
-          value={form.age}
-          onChange={handleChange}
-        />
-        <input
-          name="neighborhood"
-          placeholder="Neighborhood"
-          value={form.neighborhood}
-          onChange={handleChange}
-        />
-        <input
-          name="postalCode"
-          placeholder="Postal Code"
-          value={form.postalCode}
-          onChange={handleChange}
-        />
-        <input
-          name="hobbies"
-          placeholder="Hobbies"
-          value={form.hobbies}
           onChange={handleChange}
         />
       </div>

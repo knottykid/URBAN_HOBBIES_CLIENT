@@ -6,8 +6,6 @@ import Controls from "../controls/Controls";
 
 import { useForm, ProForm } from "../forms/useForm";
 import * as neighborhoods from "../../services/neighborhoods";
-import * as hobbies from "../../services/testing";
-import Asynchronous from "../controls/Testing";
 
 const Form = (props) => {
   console.log(props);
@@ -15,10 +13,9 @@ const Form = (props) => {
   console.log("WHAT?:", authenticate);
   const [newForm, setNewForm] = useState({
     username: user.username,
-    // email: "",
+
     gender: "",
     age: "",
-    // location: "Berlin",
     postalCode: "",
     neighborhood: "",
     hobbies: [],
@@ -68,17 +65,15 @@ const Form = (props) => {
   //     resetForm();
 
   function handleChange(event) {
-    console.log(">> " + event.target.name + ">>" + event.target.value);
+    //  /console.log(">> " + event.target.name + ">>" + event.target.value);
     setNewForm({ ...newForm, [event.target.name]: event.target.value });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
     const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
-    console.log("LOOK AT ME:", newForm.hobbies);
     PROFILE_SERVICE.UPDATE_PROFILE(newForm, accessToken)
       .then((response) => {
-        console.log("response:", response);
         authenticate(response.data.user);
       })
       .catch((err) => {
@@ -125,23 +120,6 @@ const Form = (props) => {
             onChange={handleChange}
           />
 
-          <Asynchronous />
-
-          {/* <input
-            name="hobbies"
-            label="Hobbies"
-            value={newForm.hobbies}
-            onChange={handleChange}
-          />
-
-          <Controls.Select
-            name="hobbies"
-            label="Hobbies"
-            value={newForm.hobbies}
-            onChange={handleChange}
-            options={hobbies.Testing()}
-            // error={errors.neighborhood}
-          /> */}
           <Controls.AutoComplete
             name="hobbies"
             label="Hobbies"

@@ -1,19 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./Navbar.css";
+
 import * as PATHS from "../../utils/paths";
 import * as CONSTS from "../../utils/consts";
 import { AppBar, Avatar, Button, Toolbar, Typography } from "@material-ui/core";
 import useStyles from "./styles";
+import UserPage from "../../pages/UserPage";
 
 const Navbar = (props) => {
+  const [noUser, setNoUser] = useState(false);
+  const { user, authenticate, setUser } = props;
   const classes = useStyles();
 
   return (
-    <AppBar className={classes.appBar} position="static" color="inherit">
+    <AppBar
+      children={setUser}
+      className={classes.appBar}
+      position="static"
+      color="inherit"
+    >
       <Link to={PATHS.HOMEPAGE} className={classes.brandContainer}>
         {CONSTS.CAPITALIZED_APP}
       </Link>
+      {/* <Link to={PATHS.SINGLE_USER}>Users</Link> */}
       <Toolbar className={classes.toolbar}>
         {props.user ? (
           <div className={classes.profile}>
@@ -27,7 +36,7 @@ const Navbar = (props) => {
               {props.user?.username.charAt(0)}
             </Avatar>
             <Typography className={classes.userName} variant="h6">
-              {props.user?.username}
+              {props.user?.name}
             </Typography>
 
             <Button
