@@ -12,7 +12,13 @@ import {
   CssBaseline,
   Button,
   Avatar,
+  InputLabel,
+  Input,
+  InputAdornment,
+  IconButton,
 } from "@material-ui/core";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
 import * as CONSTS from "../utils/consts";
 import * as PATHS from "../utils/paths";
@@ -57,11 +63,14 @@ export default function Signup({ authenticate, history }) {
     username: "",
     email: "",
     password: "",
+    showPassword: false,
     confirmPassword: "",
   });
   const { firstName, lastName, username, email, password, confirmPassword } =
     form;
   const [error, setError] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const handleShowPassword = () => setShowPassword(!showPassword);
 
   const classes = useStyles();
 
@@ -69,7 +78,16 @@ export default function Signup({ authenticate, history }) {
     const { name, value } = event.target;
     return setForm({ ...form, [name]: value });
   }
+  // const handleShowPassword = () => {
+  //   setForm({ ...form, showPassword: !form.showPassword });
+  // };
+  // const handleMouseDownPassword = (event) => {
+  //   event.preventDefault();
+  // };
 
+  // const handleChange = (prop) => (event) => {
+  //   setForm({ ...form, [prop]: event.target.value });
+  // };
   function handleFormSubmission(event) {
     event.preventDefault();
     const credentials = {
@@ -161,6 +179,7 @@ export default function Signup({ authenticate, history }) {
                   autoComplete="email"
                 />
               </Grid>
+
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
@@ -168,11 +187,29 @@ export default function Signup({ authenticate, history }) {
                   fullWidth
                   name="password"
                   label="Password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
+                  handleShowPassword={handleShowPassword}
                   id="password"
                   value={password}
                   onChange={handleInputChange}
                   autoComplete="current-password"
+                  InputProps={
+                    "password"
+                      ? {
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton onClick={handleShowPassword}>
+                                {"password" ? (
+                                  <Visibility />
+                                ) : (
+                                  <VisibilityOff />
+                                )}
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }
+                      : null
+                  }
                 />
               </Grid>
               <Grid item xs={12}>

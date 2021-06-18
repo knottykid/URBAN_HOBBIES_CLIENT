@@ -5,21 +5,11 @@ const profileService = axios.create({
   baseURL: `${CONSTS.SERVER_URL}/profile`,
 });
 
-const userService = axios.create({
-  baseURL: `${CONSTS.SERVER_URL}/user`,
-});
-
-export function GET_USERS(body, token) {
-  return userService.get("/:userId", body, {
-    authorization: token,
-  });
-}
-
-export function ALL_USERS(body, token) {
-  return profileService.get("/profile", body, {
-    headers: { authorization: token },
-  });
-}
+// export function ALL_USERS(body, token) {
+//   return profileService.get("/profile", body, {
+//     headers: { authorization: token },
+//   });
+// }
 
 export function FILL_FORM(body, token) {
   return profileService.post("/add", body, {

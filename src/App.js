@@ -7,7 +7,7 @@ import LogIn from "./pages/LogIn";
 
 import HobbiesPage from "./pages/HobbiesPage";
 import Signup from "./pages/Signup";
-import AddHobbyPage from "./pages/AddHobbyPage";
+// import AddHobbyPage from "./pages/AddHobbyPage";
 import NormalRoute from "./routing-components/NormalRoute";
 import ProtectedRoute from "./routing-components/ProtectedRoute";
 import ProfilePage from "./pages/ProfilePage";
@@ -16,7 +16,8 @@ import * as PATHS from "./utils/paths";
 import * as CONSTS from "./utils/consts";
 import SingleHobby from "./pages/SingleHobby";
 import JoinHobbyPage from "./pages/JoinHobbyPage";
-// import UserPage from "./pages/UserPage";
+import UserPage from "./pages/UserPage";
+import SingleUser from "./pages/SingleUser";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -86,31 +87,33 @@ export default function App() {
         />
         <ProtectedRoute
           exact
-          path={PATHS.JOIN_HOBBY}
-          component={JoinHobbyPage}
-        />
-        {/* <ProtectedRoute
-          exact
-          path={PATHS.SINGLE_USER}
-          component={UserPage}
-          user={user}
-          authenticate={authenticate}
-          setUser={setUser}
-        /> */}
-        {/* <ProtectedRoute
-          exact
-          user={user}
-          path={PATHS.ADD_HOBBY}
-          component={AddHobbyPage}
-        /> */}
-        <ProtectedRoute
-          exact
           path={PATHS.PROFILE_PAGE}
           component={ProfilePage}
           user={user}
           authenticate={authenticate}
           setUser={setUser}
         />
+        <ProtectedRoute
+          exact
+          path={PATHS.JOIN_HOBBY}
+          component={JoinHobbyPage}
+        />
+        <ProtectedRoute
+          exact
+          path={PATHS.USER}
+          component={UserPage}
+          user={user}
+          authenticate={authenticate}
+          setUser={setUser}
+        />
+        <ProtectedRoute
+          exact
+          user={user}
+          path={PATHS.SINGLE_USER}
+          component={SingleUser}
+          authenticate={authenticate}
+        />
+
         <NormalRoute exact path={PATHS.SINGLE_HOBBY} component={SingleHobby} />
       </Switch>
     </div>

@@ -8,32 +8,23 @@ import { useForm, ProForm } from "../forms/useForm";
 import * as neighborhoods from "../../services/neighborhoods";
 
 const Form = (props) => {
-  console.log(props);
+  const genderItems = [
+    { id: "male", title: "Male" },
+    { id: "female", title: "Female" },
+    { id: "other", title: "Other" },
+  ];
   const { user, authenticate } = props;
-  console.log("WHAT?:", authenticate);
-  const [newForm, setNewForm] = useState({
+  const initialValues = {
     username: user.username,
-
-    gender: "",
+    gender: "other",
     age: "",
     postalCode: "",
     neighborhood: "",
     hobbies: [],
     contacts: [],
-  });
+  };
+  const [newForm, setNewForm] = useState(initialValues);
 
-  // const initialValues = {
-  //   username: "",
-  //   // email: "",
-  //   gender: "male",
-  //   age: "",
-  //   // location: "Berlin",
-  //   postalCode: "",
-  //   neighborhood: "",
-  //   hobbies: "",
-  //   contacts: [],
-  //   //   isMember: false,
-  // };
   // const validate = (fieldValues = values) => {
   //   let temp = { ...errors };
   //   // if ("username" in fieldValues)
@@ -63,7 +54,9 @@ const Form = (props) => {
   //   if (validate())
   //     //! profileService.instert(values)
   //     resetForm();
-
+  const resetForm = () => {
+    setNewForm(initialValues);
+  };
   function handleChange(event) {
     //  /console.log(">> " + event.target.name + ">>" + event.target.value);
     setNewForm({ ...newForm, [event.target.name]: event.target.value });
@@ -79,6 +72,7 @@ const Form = (props) => {
       .catch((err) => {
         console.error(err);
       });
+    resetForm();
   }
 
   return (
@@ -99,12 +93,13 @@ const Form = (props) => {
             value={newForm.age}
             onChange={handleChange}
           />
-          {/* <Controls.RadioGroup
+          <Controls.RadioGroup
             name="gender"
             label="Gender"
             value={newForm.gender}
             onChange={handleChange}
-          /> */}
+            items={genderItems}
+          />
           <Controls.Select
             name="neighborhood"
             label="Neighborhood"

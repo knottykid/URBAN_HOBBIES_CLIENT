@@ -3,7 +3,16 @@ import { Link } from "react-router-dom";
 
 import * as PATHS from "../../utils/paths";
 import * as CONSTS from "../../utils/consts";
-import { AppBar, Avatar, Button, Toolbar, Typography } from "@material-ui/core";
+import { green } from "@material-ui/core/colors";
+import {
+  AppBar,
+  Avatar,
+  Button,
+  IconButton,
+  Toolbar,
+  Typography,
+} from "@material-ui/core";
+import PeopleIcon from "@material-ui/icons/People";
 import useStyles from "./styles";
 import UserPage from "../../pages/UserPage";
 
@@ -22,7 +31,13 @@ const Navbar = (props) => {
       <Link to={PATHS.HOMEPAGE} className={classes.brandContainer}>
         {CONSTS.CAPITALIZED_APP}
       </Link>
-      {/* <Link to={PATHS.SINGLE_USER}>Users</Link> */}
+      <IconButton label="Urbbies" href="/users">
+        <PeopleIcon fontSize="large" style={{ color: green[500] }} />
+        Urbbies
+      </IconButton>
+      {/* <Button variant="outlined" color="primary" href="#outlined-buttons">
+        <Link to={PATHS.USER}>Urbbies</Link>
+      </Button> */}
       <Toolbar className={classes.toolbar}>
         {props.user ? (
           <div className={classes.profile}>

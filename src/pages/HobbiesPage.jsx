@@ -32,7 +32,7 @@ const HobbiesPage = ({ user }) => {
 
   return (
     <>
-      <Link to={PATHS.ADD_HOBBY}>Add One</Link>
+      {/* <Link to={PATHS.ADD_HOBBY}>Add One</Link> */}
       <Card className={classes.card} raise elevation={6}>
         <Grid
           className={classes.container}

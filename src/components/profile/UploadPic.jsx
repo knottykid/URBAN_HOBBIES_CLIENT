@@ -13,12 +13,10 @@ const UploadPic = ({ user, setUser }) => {
     formBody.append("profilePic", picture);
     axios
       .post(
-        `${process.env.REACT_APP_SERVER_URL}/uploadPicture/${user._id}`,
+        `${process.env.REACT_APP_SERVER_URL}/api/uploadPicture/${user._id}`,
         formBody
       )
       .then((res) => {
-        console.log(res);
-
         setUser({ ...user, profilePic: res.data.picFromServer });
       })
       .catch((err) => console.log(err.response));
