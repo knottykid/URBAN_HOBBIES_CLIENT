@@ -47,35 +47,25 @@ const UserPage = (props) => {
     return () => console.log("au revoir");
   }, []);
 
-  //   useEffect(() => {
-  //     axios
-  //       .get(`${CONST.SERVER_URL}/user/${props.match.params.userId}`)
-  //       .then((dynamic) => {
-  //         setUser(dynamic.data.user);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err.response);
-  //       });
-  //   }, []);
   return (
     //!need to add the filter method before the map
     <div>
-      {allUser.map((funky) => (
-        <Grid key={funky._id} item xs={12} sm={12} md={3} lg={3}>
+      {allUser.map((users) => (
+        <Grid key={users._id} item xs={12} sm={12} md={3} lg={3}>
           <List className={classes.root}>
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
                 <Avatar
                   component={Link}
-                  to={`${PATHS.USER}/${funky._id}`}
+                  to={`${PATHS.USER}/${users._id}`}
                   variant="rounded"
                   alt="Profile Pic"
-                  src={funky.profilePic}
+                  src={users.profilePic}
                 />
               </ListItemAvatar>
 
               <ListItemText
-                primary={funky.username}
+                primary={users.username}
                 secondary={
                   <React.Fragment>
                     <Typography
@@ -84,13 +74,14 @@ const UserPage = (props) => {
                       className={classes.inline}
                       color="textPrimary"
                     >
-                      {funky.hobbies.join(", ")}
+                      {users.hobbies.join(", ")}
                     </Typography>
                     <br />
-                    <b>{funky.neighborhood}</b>
+                    <b>{users.neighborhood}</b>
                     <br />
-                    <b>{funky.postalCode}</b>
+                    <b>{users.postalCode}</b>
                     <br />
+                    <b>{user.location}</b>
                   </React.Fragment>
                 }
               />

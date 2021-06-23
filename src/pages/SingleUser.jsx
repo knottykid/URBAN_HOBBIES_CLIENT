@@ -4,8 +4,9 @@ import * as CONST from "../utils/consts";
 import * as USERS_SERVICE from "../services/user";
 import { Link } from "react-router-dom";
 import * as PATHS from "../utils/paths";
+import Follow from "../components/users/Follow";
 const SingleUser = (props) => {
-  const { user, authenticate } = props;
+  const { user, authenticate, setUser } = props;
   const [dynamicUser, setDynamicUser] = useState({});
 
   useEffect(() => {
@@ -28,8 +29,11 @@ const SingleUser = (props) => {
       <h2>{dynamicUser.username}</h2>
       <h3>{dynamicUser.neighborhood}</h3>
       <h3>{dynamicUser.postalCode}</h3>
+      <h3>{dynamicUser.location}</h3>
 
       <h3>{dynamicUser.hobbies?.join(", ")}</h3>
+
+      <Follow userId={dynamicUser._id} user={user} setUser={setUser} />
     </div>
   );
 };

@@ -10,3 +10,9 @@ export function GET_USERS(body, token) {
     authorization: token,
   });
 }
+
+export function FOLLOW_USER(body, token) {
+  return userService.put("/:userId/follow", body, {
+    authorization: token,
+  });
+}

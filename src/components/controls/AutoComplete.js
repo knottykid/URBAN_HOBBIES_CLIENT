@@ -13,6 +13,7 @@ const HobbiesForm = ({ onChange }) => {
     axios
       .get(`${CONST.SERVER_URL}/hobbies`)
       .then((response) => {
+        console.log("OYE:", response);
         setAllHobbies(response.data);
       })
       .catch((error) => {
@@ -34,6 +35,11 @@ const HobbiesForm = ({ onChange }) => {
       multiple
       id="urban-hobbies"
       freeSolo
+      selectOnFocus
+      clearOnBlur
+      handleHomeEndKeys
+      disableCloseOnSelect={true}
+      filterSelectedOptions
       onChange={handleChange}
       options={allHobbies.map((option) => option.name)}
       renderInput={(params) => (

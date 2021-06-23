@@ -78,16 +78,7 @@ export default function Signup({ authenticate, history }) {
     const { name, value } = event.target;
     return setForm({ ...form, [name]: value });
   }
-  // const handleShowPassword = () => {
-  //   setForm({ ...form, showPassword: !form.showPassword });
-  // };
-  // const handleMouseDownPassword = (event) => {
-  //   event.preventDefault();
-  // };
 
-  // const handleChange = (prop) => (event) => {
-  //   setForm({ ...form, [prop]: event.target.value });
-  // };
   function handleFormSubmission(event) {
     event.preventDefault();
     const credentials = {

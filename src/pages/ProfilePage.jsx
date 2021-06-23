@@ -2,11 +2,22 @@ import React, { useState } from "react";
 import UploadPic from "../components/profile/UploadPic";
 
 import Form from "../components/profile/Form";
-import { IconButton, makeStyles, Paper, Tooltip } from "@material-ui/core";
+import {
+  IconButton,
+  makeStyles,
+  Paper,
+  Tooltip,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+} from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import DeleteProfile from "../components/profile/DeleteProfile";
 import PersonPinIcon from "@material-ui/icons/PersonPin";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
+import Popup from "../components/controls/Popup";
+import Controls from "../components/controls/Controls";
 const useStyles = makeStyles((theme) => ({
   pageContent: {
     margin: theme.spacing(5),
@@ -17,11 +28,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function ProfilePage({ user, authenticate, setUser }) {
   const [displayUpdateProfile, setDisplayUpdateProfile] = useState(false);
+  const [openPopup, setOpenPopup] = useState(false);
   //   const [displayUpdatePassword, setDisplayUpdatePassword] = useState(false);
   const [picture, setPicture] = useState(false);
   const [deleteUser, setDeleteUser] = useState(false);
 
   const classes = useStyles();
+
+  const handleClickOpen = () => {
+    setOpenPopup(true);
+  };
+
+  const handleClose = () => {
+    setOpenPopup(false);
+  };
+
   function profileToggle() {
     setDisplayUpdateProfile(!displayUpdateProfile);
   }
@@ -54,21 +75,31 @@ export default function ProfilePage({ user, authenticate, setUser }) {
         <h3>Gender: {user.gender}</h3>
         <h3>Hood: {user.neighborhood}</h3>
         <h3>PLZ: {user.postalCode}</h3>
-        <h3>Hobbies:{user.hobbies.join(", ")}</h3>
+        <h3>City: {user.location}</h3>
+        <h3>Hobbies:{user.hobbies?.join(", ")}</h3>
       </Paper>
       <div>
         <Tooltip title="Update">
-          <IconButton aria-label="person" onClick={profileToggle}>
+          <IconButton aria-label="person" onClick={handleClickOpen}>
             <PersonPinIcon fontSize="large" />
             Update your profile{" "}
           </IconButton>
         </Tooltip>
-        {/* {displayUpdateProfile ? <UpdateProfile /> : null} */}
-        {displayUpdateProfile && (
-          <Paper className={classes.pageContent}>
+
+        <Dialog
+          open={openPopup}
+          onClose={handleClose}
+          maxWidth="md"
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">Update</DialogTitle>
+          <DialogContent divider>
             <Form user={user} authenticate={authenticate} />
-          </Paper>
-        )}
+          </DialogContent>
+          <DialogActions>
+            <Controls.Button text="Close" onClick={handleClose} />
+          </DialogActions>
+        </Dialog>
 
         <Tooltip title="Photo">
           <IconButton aria-label="photo" onClick={pictureToggle}>
@@ -87,6 +118,18 @@ export default function ProfilePage({ user, authenticate, setUser }) {
         {deleteUser && (
           <DeleteProfile user={user} authenticate={authenticate} />
         )}
+
+        {/* <Controls.Button
+          text="click me"
+          variant="outlined"
+          onClick={handleClickOpen}
+        /> */}
+
+        {/* <openPopup openPopup={openPopup} setOpenPopup={setOpenPopup}>
+          <Paper className={classes.pageContent}>
+            <Form user={user} authenticate={authenticate} />
+          </Paper>
+        </openPopup> */}
       </div>
     </div>
   );

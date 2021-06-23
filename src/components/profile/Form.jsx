@@ -132,7 +132,7 @@ const Form = (props) => {
           /> */}
           <div>
             <Controls.Button type="submit" text="Submit" />
-            <Controls.Button text="Reset" color="default" />
+            <Controls.Button text="Reset" color="default" onClick={resetForm} />
           </div>
         </Grid>
       </Grid>

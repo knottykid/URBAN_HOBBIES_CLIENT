@@ -7,7 +7,7 @@ import LogIn from "./pages/LogIn";
 
 import HobbiesPage from "./pages/HobbiesPage";
 import Signup from "./pages/Signup";
-// import AddHobbyPage from "./pages/AddHobbyPage";
+
 import NormalRoute from "./routing-components/NormalRoute";
 import ProtectedRoute from "./routing-components/ProtectedRoute";
 import ProfilePage from "./pages/ProfilePage";
@@ -15,9 +15,10 @@ import { getLoggedIn, logout } from "./services/auth";
 import * as PATHS from "./utils/paths";
 import * as CONSTS from "./utils/consts";
 import SingleHobby from "./pages/SingleHobby";
-import JoinHobbyPage from "./pages/JoinHobbyPage";
+
 import UserPage from "./pages/UserPage";
 import SingleUser from "./pages/SingleUser";
+import Messenger from "./pages/messenger/Messenger";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -93,11 +94,7 @@ export default function App() {
           authenticate={authenticate}
           setUser={setUser}
         />
-        <ProtectedRoute
-          exact
-          path={PATHS.JOIN_HOBBY}
-          component={JoinHobbyPage}
-        />
+
         <ProtectedRoute
           exact
           path={PATHS.USER}
@@ -111,6 +108,14 @@ export default function App() {
           user={user}
           path={PATHS.SINGLE_USER}
           component={SingleUser}
+          authenticate={authenticate}
+          setUser={setUser}
+        />
+        <ProtectedRoute
+          exact
+          path={PATHS.MESSENGERS_PAGE}
+          component={Messenger}
+          user={user}
           authenticate={authenticate}
         />
 
