@@ -5,14 +5,15 @@ import * as CONST from "../../utils/consts";
 import * as USER_SERVICE from "../../services/user";
 import PersonAddDisabledIcon from "@material-ui/icons/PersonAddDisabled";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import { IconButton, Tooltip } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 const Follow = (props) => {
   console.log("SEE:", props);
   const { userId, user, setUser } = props;
   const [error, setError] = useState(null);
   const [follow, setFollow] = useState(false);
 
-  function followToggles() {
+  function followToggles(e) {
+    e.preventDefault();
     setFollow(!follow);
   }
 
@@ -33,9 +34,13 @@ const Follow = (props) => {
   //       });
   //   };
 
-  let userFollows;
+  let meFollow;
+
   if (user) {
-    userFollows = user.following.some((e) => e._id === userId);
+    meFollow = user.following.some((e) => e._id === userId);
+    console.log(user.following.some((e) => e._id === userId));
+    console.log("YO", user.following);
+    console.log("DE", userId);
 
     const followTheLeader = (e) => {
       e.preventDefault();
@@ -82,20 +87,25 @@ const Follow = (props) => {
     };
     return (
       <div>
-        {/* <button onChange={handleFollowChange} onClick={handleFollowSubmit}>
-        Follow
-      </button> */}
-        <Tooltip title="Follow">
-          <IconButton aria-label="Follow" onClick={followToggles}>
-            <PersonAddIcon fontSize="large" onClick={followTheLeader} />
-          </IconButton>
-        </Tooltip>
-
-        {/* {userFollows ? (
-          <button onClick={followTheLeader}>UnFollow</button>
+        {meFollow ? (
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={followTheLeader}
+            startIcon={<PersonAddDisabledIcon />}
+          >
+            UnFollow
+          </Button>
         ) : (
-          <button onClick={followTheLeader}>Follow</button>
-        )} */}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={followTheLeader}
+            startIcon={<PersonAddIcon />}
+          >
+            Follow
+          </Button>
+        )}
       </div>
     );
   }

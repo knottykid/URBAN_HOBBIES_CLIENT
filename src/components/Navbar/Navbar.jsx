@@ -29,7 +29,11 @@ const Navbar = (props) => {
       color="inherit"
     >
       <Link to={PATHS.HOMEPAGE} className={classes.brandContainer}>
-        {CONSTS.CAPITALIZED_APP}
+        <img
+          src="https://res.cloudinary.com/dzxo1mr9i/image/upload/v1624484155/urban-hobbies/bx9jk06jy010fbtfpxhm.jpg"
+          alt="urban hobbies logo"
+          width="55"
+        />
       </Link>
       <IconButton label="Urbbies" href="/users">
         <PeopleIcon fontSize="large" style={{ color: green[500] }} />

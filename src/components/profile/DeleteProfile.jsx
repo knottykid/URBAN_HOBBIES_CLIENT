@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import * as DELETE from "../../services/profile";
 import * as CONST from "../../utils/consts";
 import { useHistory } from "react-router-dom";
+import { Button } from "@material-ui/core";
 
 const DeleteProfile = (props) => {
   const { user, authenticate } = props;
@@ -27,7 +28,9 @@ const DeleteProfile = (props) => {
 
   return (
     <form onSubmit={onSubmit}>
-      <button type="submit">Are You Sure?</button>
+      <Button variant="contained" color="secondary" type="submit">
+        Are You Sure?
+      </Button>
     </form>
   );
 };

@@ -1,8 +1,22 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
+  input: {
+    display: "none",
+  },
+}));
 const UploadPic = ({ user, setUser }) => {
   const [picture, setPicture] = useState(null);
+  const classes = useStyles();
 
   function handleFormSubmit(e) {
     e.preventDefault();
@@ -31,7 +45,14 @@ const UploadPic = ({ user, setUser }) => {
     <div>
       <form onSubmit={handleFormSubmit}>
         <input type="file" onChange={handleInput} />
-        <button type="submit">Upload your own Picture</button>
+        <Button
+          variant="contained"
+          color="default"
+          // onChange={handleInput}
+          type="submit"
+        >
+          Up
+        </Button>
       </form>
     </div>
   );
