@@ -16,44 +16,14 @@ const Form = (props) => {
   const { user, authenticate } = props;
   const initialValues = {
     username: user.username,
-    gender: "other",
-    age: "",
-    postalCode: "",
-    neighborhood: "",
-    hobbies: [],
-    contacts: [],
+    gender: "other" || user.gender,
+    age: "" || user.age,
+    postalCode: "" || user.postalCode,
+    neighborhood: "" || user.neighborhood,
+    hobbies: [] || user.hobbies,
   };
   const [newForm, setNewForm] = useState(initialValues);
 
-  // const validate = (fieldValues = values) => {
-  //   let temp = { ...errors };
-  //   // if ("username" in fieldValues)
-  //   //   temp.username = fieldValues.username ? "" : "This field is required";
-  //   // temp.email = /$ˆ|.+@.}..}/.test(fieldValues.email) ? "" : "Email is not valid";
-  //    temp.age = fieldValues.age ? "" : "This field is required";
-  //    temp.postalCode =
-  //      fieldValues.postalCode.length > 4 ? "" : "Minimum 5 numbers required";
-  //   if ("neighborhood" in fieldValues)
-  //     temp.neighborhood =
-  //       fieldValues.neighborhood.length !== 0 ? "" : "This field is required";
-  //   if ("hobbies" in fieldValues)
-  //     temp.hobbies =
-  //       fieldValues.hobbies.length !== 0 ? "" : "This field is required";
-  //   setErrors({
-  //     ...temp,
-  //   });
-
-  //   if (fieldValues === values)
-  //     return Object.values(temp).every((x) => x === "");
-  // };
-
-  // const { values, setValues, errors, setErrors, handleInputChange, resetForm } =
-  //   useForm(initialValues, true, validate);
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-  //   if (validate())
-  //     //! profileService.instert(values)
-  //     resetForm();
   const resetForm = () => {
     setNewForm(initialValues);
   };

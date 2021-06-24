@@ -7,11 +7,9 @@ import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
-      margin: theme.spacing(1),
+      // margin: theme.spacing(1),
+      textTransform: "none",
     },
-  },
-  input: {
-    display: "none",
   },
 }));
 const UploadPic = ({ user, setUser }) => {
@@ -46,12 +44,12 @@ const UploadPic = ({ user, setUser }) => {
       <form onSubmit={handleFormSubmit}>
         <input type="file" onChange={handleInput} />
         <Button
+          className={classes.root}
           variant="contained"
-          color="default"
-          // onChange={handleInput}
+          color="primary"
           type="submit"
         >
-          Up
+          Push
         </Button>
       </form>
     </div>

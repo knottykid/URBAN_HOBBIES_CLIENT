@@ -5,7 +5,7 @@ export default makeStyles({
     height: 0,
     margin: "5%",
     padding: "45%",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "rgba(11, 156, 49, 0.4)",
     backgroundBlendMode: "darken",
   },
   border: {

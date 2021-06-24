@@ -1,9 +1,11 @@
 import React from "react";
 import { Button as MuiButton, makeStyles } from "@material-ui/core";
+import { green } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: theme.spacing(0, 5),
+    backgroundColor: green[500],
   },
   label: { textTransform: "none" },
 }));

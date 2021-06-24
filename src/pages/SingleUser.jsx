@@ -6,13 +6,16 @@ import { Link } from "react-router-dom";
 import * as PATHS from "../utils/paths";
 import Follow from "../components/users/Follow";
 import LoadingComponent from "../components/Loading";
-import { Card, Grid, Typography } from "@material-ui/core";
+import { Card, Grid, Typography, Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   card: {
     margin: theme.spacing(2, 20),
     padding: theme.spacing(1),
+  },
+  container: {
+    backgroundColor: theme.palette.grey[100],
   },
 }));
 const SingleUser = (props) => {
@@ -46,64 +49,78 @@ const SingleUser = (props) => {
   console.log("AIC", dynamicUser.followers[0].username);
   return (
     <div>
-      <Card className={classes.card} raise elevation={9}>
-        <Grid spacing={1}>
-          <div>
-            <Follow userId={dynamicUser._id} user={user} setUser={setUser} />
-          </div>
-          <br />
-          <img src={dynamicUser.profilePic} alt="pic of the user" width="200" />
-          <Typography variant="h6" align="center">
-            {dynamicUser.username}
-          </Typography>
-          <Typography variant="h6" align="center">
-            {dynamicUser.neighborhood}
-          </Typography>
-          <Typography variant="h6" align="center">
-            {dynamicUser.postalCode}
-          </Typography>
-          <Typography variant="h6" align="center">
-            {dynamicUser.location}
-          </Typography>
-
-          <Typography variant="h6" align="center">
-            {dynamicUser.hobbies?.join(", ")}
-          </Typography>
-          <br />
-
-          <Typography variant="h6" align="center">
-            Following:{" "}
-          </Typography>
-          {dynamicUser?.following?.map((e) => {
-            return (
-              <div key={e._id}>
-                <img src={e?.profilePic} alt="following" width="50" />
-                <br />
-                <Typography variant="h6" align="center">
-                  {e?.username?.split(", ")}
-                </Typography>
-              </div>
-            );
-          })}
-          <>
+      <Container
+        className={classes.container}
+        component="main"
+        xs={12}
+        s={12}
+        md={3}
+        lg={3}
+      >
+        <Card className={classes.card} raise elevation={9}>
+          <Grid spacing={1}>
+            <div>
+              <Follow userId={dynamicUser._id} user={user} setUser={setUser} />
+            </div>
+            <br />
+            <img
+              src={dynamicUser.profilePic}
+              alt="pic of the user"
+              width="200"
+            />
             <Typography variant="h6" align="center">
-              Followers:{" "}
+              {dynamicUser?.username}
             </Typography>
-            {dynamicUser?.followers?.map((e) => {
-              return (
-                <div key={e._id}>
-                  <img src={e?.profilePic} alt="followers" width="50" />
+            <Typography variant="h6" align="center">
+              {dynamicUser.neighborhood}
+            </Typography>
+            <Typography variant="h6" align="center">
+              {dynamicUser.postalCode}
+            </Typography>
+            <Typography variant="h6" align="center">
+              {dynamicUser.location}
+            </Typography>
+
+            <Typography variant="h6" align="center">
+              {dynamicUser.hobbies?.join(", ")}
+            </Typography>
+            <br />
+
+            <Typography variant="h6" align="center">
+              Following:{" "}
+            </Typography>
+
+            {dynamicUser?.following?.map((users) =>
+              dynamicUser.following ? (
+                <div key={users._id}>
+                  <img src={users?.profilePic} alt="following" width="50" />
                   <br />
                   <Typography variant="h6" align="center">
-                    {" "}
-                    {e?.username}
+                    {users?.username}
                   </Typography>
                 </div>
-              );
-            })}
-          </>
-        </Grid>
-      </Card>
+              ) : null
+            )}
+            <>
+              <Typography variant="h6" align="center">
+                Followers:{" "}
+              </Typography>
+              {dynamicUser?.followers?.map((users) =>
+                dynamicUser.followers ? (
+                  <div key={users._id}>
+                    <img src={users?.profilePic} alt="followers" width="50" />
+                    <br />
+                    <Typography variant="h6" align="center">
+                      {" "}
+                      {users?.username}
+                    </Typography>
+                  </div>
+                ) : null
+              )}
+            </>
+          </Grid>
+        </Card>
+      </Container>
     </div>
   );
 };

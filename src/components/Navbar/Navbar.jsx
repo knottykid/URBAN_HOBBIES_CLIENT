@@ -12,6 +12,7 @@ import {
   Toolbar,
   Typography,
 } from "@material-ui/core";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import PeopleIcon from "@material-ui/icons/People";
 import useStyles from "./styles";
 import UserPage from "../../pages/UserPage";
@@ -29,24 +30,22 @@ const Navbar = (props) => {
       color="inherit"
     >
       <Link to={PATHS.HOMEPAGE} className={classes.brandContainer}>
-        <img
-          src="https://res.cloudinary.com/dzxo1mr9i/image/upload/v1624484155/urban-hobbies/bx9jk06jy010fbtfpxhm.jpg"
-          alt="urban hobbies logo"
-          width="55"
-        />
+        <img src="logo/Logo3.png" alt="urban hobbies logo" width="100" />
       </Link>
-      <IconButton label="Urbbies" href="/users">
-        <PeopleIcon fontSize="large" style={{ color: green[500] }} />
-        Urbbies
-      </IconButton>
+
       {/* <Button variant="outlined" color="primary" href="#outlined-buttons">
         <Link to={PATHS.USER}>Urbbies</Link>
       </Button> */}
       <Toolbar className={classes.toolbar}>
         {props.user ? (
           <div className={classes.profile}>
+            <IconButton label="Urbbies" href="/users">
+              <PeopleIcon fontSize="large" style={{ color: green[400] }} />
+              Urbbies
+            </IconButton>
+
             <Avatar
-              className={classes.purple}
+              className={classes.green}
               alt={props.user?.username}
               src={props.user?.profilePic}
               component={Link}
@@ -63,12 +62,14 @@ const Navbar = (props) => {
               className={classes.logout}
               color="secondary"
               onClick={props.handleLogout}
+              startIcon={<ExitToAppIcon />}
             >
               Logout
             </Button>
           </div>
         ) : (
           <Button
+            className={classes.login}
             component={Link}
             to="/auth/login"
             variant="contained"

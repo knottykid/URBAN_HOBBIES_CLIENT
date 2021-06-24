@@ -1,15 +1,16 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { deepPurple } from "@material-ui/core/colors";
+import { blue, green, lightGreen, red } from "@material-ui/core/colors";
 
 export default makeStyles((theme) => ({
   appBar: {
-    borderRadius: 15,
-    margin: "30px 0",
+    borderRadius: 25,
+    margin: "10px 0",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     padding: "10px 50px",
+    backgroundColor: theme.palette.grey[100],
     [theme.breakpoints.down("sm")]: {
       flexDirection: "column",
     },
@@ -45,6 +46,8 @@ export default makeStyles((theme) => ({
   },
   logout: {
     marginLeft: "20px",
+    backgroundColor: red[500],
+    textTransform: "none",
   },
   userName: {
     display: "flex",
@@ -55,8 +58,13 @@ export default makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
   },
-  purple: {
-    color: theme.palette.getContrastText(deepPurple[500]),
-    backgroundColor: deepPurple[500],
+  green: {
+    color: theme.palette.getContrastText(lightGreen[500]),
+    backgroundColor: lightGreen[500],
+  },
+
+  login: {
+    backgroundColor: blue[500],
+    textTransform: "none",
   },
 }));

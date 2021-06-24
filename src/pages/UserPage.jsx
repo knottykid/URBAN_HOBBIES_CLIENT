@@ -11,6 +11,7 @@ import {
   ListItemAvatar,
   ListItemText,
   Typography,
+  Container,
 } from "@material-ui/core";
 
 import Avatar from "@material-ui/core/Avatar";
@@ -25,12 +26,16 @@ const useStyles = makeStyles((theme) => ({
   inline: {
     display: "inline",
   },
+  container: {
+    backgroundColor: theme.palette.grey[100],
+  },
 }));
 
 const UserPage = (props) => {
   const { user, setUser, authenticate } = props;
   const [allUser, setAllUser] = useState([]);
   const classes = useStyles();
+  console.log("++", user.neighborhood);
 
   useEffect(() => {
     axios
@@ -45,64 +50,64 @@ const UserPage = (props) => {
       });
     return () => console.log("au revoir");
   }, []);
-
+  console.log("ALL", allUser);
   return (
-    //!need to add the filter method before the map
     <div>
-      {allUser.map((users) => (
-        <Grid key={users._id} item xs={12} sm={12} md={3} lg={3}>
-          <List className={classes.root}>
-            <ListItem alignItems="flex-start">
-              <ListItemAvatar>
-                <Avatar
-                  component={Link}
-                  to={`${PATHS.USER}/${users._id}`}
-                  variant="rounded"
-                  alt="Profile Pic"
-                  src={users.profilePic}
-                />
-              </ListItemAvatar>
+      {allUser.map((users) =>
+        (user.neighborhood === users.neighborhood && user._id !== users._id) ||
+        (user.hobbies === users.hobbies && user._id !== users._id) ? (
+          <div>
+            {" "}
+            <Container
+              className={classes.container}
+              component="main"
+              xs={12}
+              s={12}
+              md={3}
+              lg={3}
+            >
+              <Grid key={users._id} item xs={12} sm={12} md={3} lg={3}>
+                <List className={classes.root}>
+                  <ListItem alignItems="flex-start">
+                    <ListItemAvatar>
+                      <Avatar
+                        component={Link}
+                        to={`${PATHS.USER}/${users._id}`}
+                        variant="rounded"
+                        alt="Profile Pic"
+                        src={users.profilePic}
+                      />
+                    </ListItemAvatar>
 
-              <ListItemText
-                primary={users.username}
-                secondary={
-                  <React.Fragment>
-                    <Typography
-                      component="span"
-                      variant="body2"
-                      className={classes.inline}
-                      color="textPrimary"
-                    >
-                      {users.hobbies.join(", ")}
-                    </Typography>
-                    <br />
-                    <b>{users.neighborhood}</b>
-                    <br />
-                    <b>{users.postalCode}</b>
-                    <br />
-                    <b>{user.location}</b>
-                  </React.Fragment>
-                }
-              />
-            </ListItem>
-            <Divider variant="inset" component="li" />
-          </List>
-        </Grid>
-      ))}
-      {/* </Typography> */}
-      {/* <Typography variant="h3" component="h2"> */}
-      {/* {user.map((members) => (
-        <Grid key={members._id} item xs={12} sm={12} md={3} lg={3}>
-          {members.username}
-          <br />
-          {members.neighborhood}
-          <br />
-          {members.postalCode}
-          <br />
-          {members.hobbies}
-        </Grid>
-      ))} */}
-      {/* </Typography> */}
+                    <ListItemText
+                      primary={users.username}
+                      secondary={
+                        <React.Fragment>
+                          <Typography
+                            component="span"
+                            variant="body2"
+                            className={classes.inline}
+                            color="textPrimary"
+                          >
+                            {users.hobbies.join(", ")}
+                          </Typography>
+                          <br />
+                          <b>{users.neighborhood}</b>
+                          <br />
+                          <b>{users.postalCode}</b>
+                          <br />
+                          <b>{user.location}</b>
+                        </React.Fragment>
+                      }
+                    />
+                  </ListItem>
+                  <Divider variant="inset" component="li" />
+                </List>
+              </Grid>
+            </Container>
+          </div>
+        ) : null
+      )}
     </div>
   );
 };

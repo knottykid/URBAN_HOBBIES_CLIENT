@@ -50,6 +50,9 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  container: {
+    backgroundColor: theme.palette.grey[100],
+  },
 }));
 
 export default function LogIn({ authenticate, history }) {
@@ -86,7 +89,7 @@ export default function LogIn({ authenticate, history }) {
 
   return (
     <div>
-      <Container component="main" maxWidth="xs">
+      <Container className={classes.container} component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>

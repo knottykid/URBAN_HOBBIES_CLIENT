@@ -45,7 +45,10 @@ const HobbiesPage = ({ user }) => {
               <img src={hobby.image} alt="hobby" width="200" />
               <h2>{hobby.name}</h2>
             </Link> */}
-              <Link to={`${PATHS.HOBBIES_PAGE}/${hobby._id}`} style={{}}>
+              <Link
+                to={`${PATHS.HOBBIES_PAGE}/${hobby._id}`}
+                style={{ textDecoration: "none", color: "green" }}
+              >
                 <CardMedia
                   className={classes.media}
                   image={hobby.image}
