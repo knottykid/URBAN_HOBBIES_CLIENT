@@ -6,10 +6,20 @@ import { Link } from "react-router-dom";
 import * as PATHS from "../utils/paths";
 import Follow from "../components/users/Follow";
 import LoadingComponent from "../components/Loading";
+import { Card, Grid, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  card: {
+    margin: theme.spacing(2, 20),
+    padding: theme.spacing(1),
+  },
+}));
 const SingleUser = (props) => {
   const { user, authenticate, setUser } = props;
   const [dynamicUser, setDynamicUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const classes = useStyles();
 
   useEffect(() => {
     setIsLoading(true);
@@ -36,44 +46,64 @@ const SingleUser = (props) => {
   console.log("AIC", dynamicUser.followers[0].username);
   return (
     <div>
-      <img src={dynamicUser.profilePic} alt="pic of the user" width="200" />
-      <h2>{dynamicUser.username}</h2>
-      <h3>{dynamicUser.neighborhood}</h3>
-      <h3>{dynamicUser.postalCode}</h3>
-      <h3>{dynamicUser.location}</h3>
-
-      <h3>{dynamicUser.hobbies?.join(", ")}</h3>
-      <br />
-
-      <Follow userId={dynamicUser._id} user={user} setUser={setUser} />
-      <h3>Following: </h3>
-      {dynamicUser.following.map((e) => {
-        return (
-          <div key={e._id}>
-            <img src={e.profilePic} alt="following" width="50" />
-            <br />
-            {e.username?.split(", ")}
+      <Card className={classes.card} raise elevation={9}>
+        <Grid spacing={1}>
+          <div>
+            <Follow userId={dynamicUser._id} user={user} setUser={setUser} />
           </div>
-        );
-      })}
-      <>
-        <h3>Followers: </h3>
-        {dynamicUser.followers.map((e) => {
-          return (
-            <div key={e._id}>
-              <img src={e.profilePic} alt="followers" width="50" />
-              <br />
-              {e.username}
-            </div>
-          );
-        })}
-      </>
-      {/* <h4>Followers: {JSON.stringify(dynamicUser.followers.username)}</h4> */}
-      {/* 
-      <i>Followers: {JSON.stringify(dynamicUser.name)}</i> */}
-      <br />
+          <br />
+          <img src={dynamicUser.profilePic} alt="pic of the user" width="200" />
+          <Typography variant="h6" align="center">
+            {dynamicUser.username}
+          </Typography>
+          <Typography variant="h6" align="center">
+            {dynamicUser.neighborhood}
+          </Typography>
+          <Typography variant="h6" align="center">
+            {dynamicUser.postalCode}
+          </Typography>
+          <Typography variant="h6" align="center">
+            {dynamicUser.location}
+          </Typography>
 
-      {/* <i>Following: {dynamicUser.following[0].username}</i> */}
+          <Typography variant="h6" align="center">
+            {dynamicUser.hobbies?.join(", ")}
+          </Typography>
+          <br />
+
+          <Typography variant="h6" align="center">
+            Following:{" "}
+          </Typography>
+          {dynamicUser?.following?.map((e) => {
+            return (
+              <div key={e._id}>
+                <img src={e?.profilePic} alt="following" width="50" />
+                <br />
+                <Typography variant="h6" align="center">
+                  {e?.username?.split(", ")}
+                </Typography>
+              </div>
+            );
+          })}
+          <>
+            <Typography variant="h6" align="center">
+              Followers:{" "}
+            </Typography>
+            {dynamicUser?.followers?.map((e) => {
+              return (
+                <div key={e._id}>
+                  <img src={e?.profilePic} alt="followers" width="50" />
+                  <br />
+                  <Typography variant="h6" align="center">
+                    {" "}
+                    {e?.username}
+                  </Typography>
+                </div>
+              );
+            })}
+          </>
+        </Grid>
+      </Card>
     </div>
   );
 };

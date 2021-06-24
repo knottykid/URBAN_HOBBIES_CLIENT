@@ -5,6 +5,7 @@ import Form from "../components/profile/Form";
 import {
   makeStyles,
   Paper,
+  Grid,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -25,17 +26,31 @@ import Popup from "../components/controls/Popup";
 import Controls from "../components/controls/Controls";
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 320,
-  },
-  pageContent: {
-    margin: theme.spacing(5),
-    marginBottom: theme.spacing(5),
-    paddingLeft: theme.spacing(50),
+    width: 200,
+    height: 200,
+    margin: theme.spacing(2, 20),
+    padding: theme.spacing(1),
     alignItems: "center",
     justifyContent: "center",
   },
+  card: {
+    margin: theme.spacing(0, 20),
+    padding: theme.spacing(0),
+    // display: "flex",
+    // alignItems: "start",
+    // justifyContent: "start",
+  },
+  pageContent: {
+    margin: theme.spacing(2),
+    padding: theme.spacing(2),
+    // marginBottom: theme.spacing(5),
+    // paddingLeft: theme.spacing(50),
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#F6F7DA",
+  },
   button: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(0, 5),
     // padding: theme.spacing(1),
     alignItems: "center",
     justifyContent: "center",
@@ -73,17 +88,22 @@ export default function ProfilePage({ user, authenticate, setUser }) {
   // A "middleware" that is going to check if you are validated or not
   return (
     // <div className={classes.root}>
-    <Paper elevation={5} className={classes.pageContent}>
+    // <Paper elevation={5} className={classes.pageContent}>
+    <>
       <Card className={classes.root}>
         <CardActionArea>
           <CardMedia
             component="img"
             alt={`Profile  for ${user.username}`}
-            width="20"
+            width="10%"
             image={user.profilePic}
             title="Profile Picture"
           />
-          <CardContent>
+        </CardActionArea>
+      </Card>
+      <Card className={classes.card}>
+        <Grid container item s={12} xs={12} md={6} lg={6}>
+          <CardContent classes={classes.CardContent}>
             <Typography gutterBottom variant="h5" component="h2">
               Welcome to your profile {user.username}
             </Typography>
@@ -98,61 +118,67 @@ export default function ProfilePage({ user, authenticate, setUser }) {
               </ul>
             </Typography>
           </CardContent>
-        </CardActionArea>
-        <CardActions disableSpacing={false}>
-          <Button
-            variant="contained"
-            color="primary"
-            component="span"
-            className={classes.button}
-            onClick={handleClickOpen}
-            startIcon={<PersonPinIcon />}
-          >
-            Update
-          </Button>
-
-          <Dialog
-            open={openPopup}
-            onClose={handleClose}
-            maxWidth="md"
-            aria-labelledby="form-dialog-title"
-          >
-            <DialogTitle id="form-dialog-title">Update</DialogTitle>
-            <DialogContent divider>
-              <Form user={user} authenticate={authenticate} />
-            </DialogContent>
-            <DialogActions>
-              <Controls.Button text="Close" onClick={handleClose} />
-            </DialogActions>
-          </Dialog>
-
-          <Button
-            variant="contained"
-            color="primary"
-            component="span"
-            className={classes.button}
-            onClick={pictureToggle}
-            startIcon={<AddAPhotoIcon />}
-          >
-            Upload
-          </Button>
-          {picture && <UploadPic user={user} setUser={setUser} />}
-
-          <Button
-            variant="contained"
-            color="secondary"
-            className={classes.button}
-            onClick={deleteToggle}
-            startIcon={<DeleteIcon />}
-          >
-            Delete
-          </Button>
-          {deleteUser && (
-            <DeleteProfile user={user} authenticate={authenticate} />
-          )}
-        </CardActions>
+        </Grid>
       </Card>
-    </Paper>
+      <br />
+      <Card className={classes.card}>
+        <Grid item xs={12}>
+          <CardActions disableSpacing={false}>
+            <Button
+              variant="contained"
+              color="primary"
+              component="span"
+              className={classes.button}
+              onClick={handleClickOpen}
+              startIcon={<PersonPinIcon />}
+            >
+              Update
+            </Button>
+
+            <Dialog
+              open={openPopup}
+              onClose={handleClose}
+              maxWidth="md"
+              aria-labelledby="form-dialog-title"
+            >
+              <DialogTitle id="form-dialog-title">Update</DialogTitle>
+              <DialogContent divider>
+                <Form user={user} authenticate={authenticate} />
+              </DialogContent>
+              <DialogActions>
+                <Controls.Button text="Close" onClick={handleClose} />
+              </DialogActions>
+            </Dialog>
+
+            <Button
+              variant="contained"
+              color="primary"
+              component="span"
+              className={classes.button}
+              onClick={pictureToggle}
+              startIcon={<AddAPhotoIcon />}
+            >
+              Upload
+            </Button>
+            {picture && <UploadPic user={user} setUser={setUser} />}
+
+            <Button
+              variant="contained"
+              color="secondary"
+              className={classes.button}
+              onClick={deleteToggle}
+              startIcon={<DeleteIcon />}
+            >
+              Delete
+            </Button>
+            {deleteUser && (
+              <DeleteProfile user={user} authenticate={authenticate} />
+            )}
+          </CardActions>
+        </Grid>
+      </Card>
+    </>
+    // </Paper>
     // </div>
   );
 }

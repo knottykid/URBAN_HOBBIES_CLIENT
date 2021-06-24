@@ -123,13 +123,7 @@ const Form = (props) => {
 
             // error={errors.hobbies}
           />
-          {/* <Controls.RadioGroup
-            name="gender"
-            label="Gender"
-            value={values.gender}
-            onChange={handleInputChange}
-            items={genderItems}
-          /> */}
+
           <div>
             <Controls.Button type="submit" text="Submit" />
             <Controls.Button text="Reset" color="default" onClick={resetForm} />

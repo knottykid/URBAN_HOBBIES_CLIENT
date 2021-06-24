@@ -32,7 +32,6 @@ const HobbiesPage = ({ user }) => {
 
   return (
     <>
-      {/* <Link to={PATHS.ADD_HOBBY}>Add One</Link> */}
       <Card className={classes.card} raise elevation={6}>
         <Grid
           className={classes.container}
@@ -70,16 +69,6 @@ const HobbiesPage = ({ user }) => {
           ))}
         </Grid>
       </Card>
-      {/* {listOfHobbies.map((hobby) => {
-        return (
-          <section key={hobby._id}>
-            <Link to={`${PATHS.HOBBIES_PAGE}/${hobby._id}`} style={{}}>
-              <img src={hobby.image} alt="hobby" width="200" />
-              <h2>{hobby.name}</h2>
-            </Link>
-          </section>
-        );
-      })} */}
     </>
   );
 };

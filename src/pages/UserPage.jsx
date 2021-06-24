@@ -38,7 +38,6 @@ const UserPage = (props) => {
         headers: { authorization: localStorage.getItem(CONST.ACCESS_TOKEN) },
       })
       .then((response) => {
-        console.log("NOM", response);
         setAllUser(response.data);
       })
       .catch((error) => {
