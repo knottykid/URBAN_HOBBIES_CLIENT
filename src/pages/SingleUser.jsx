@@ -45,8 +45,7 @@ const SingleUser = (props) => {
   if (isLoading) {
     return <LoadingComponent />;
   }
-  console.log("NIRVANA", dynamicUser.followers);
-  console.log("AIC", dynamicUser.followers[0].username);
+
   return (
     <div>
       <Container
@@ -92,7 +91,7 @@ const SingleUser = (props) => {
 
             {dynamicUser?.following?.map((users) =>
               dynamicUser.following ? (
-                <div key={users._id}>
+                <div key={users?._id}>
                   <img src={users?.profilePic} alt="following" width="50" />
                   <br />
                   <Typography variant="h6" align="center">
@@ -107,7 +106,7 @@ const SingleUser = (props) => {
               </Typography>
               {dynamicUser?.followers?.map((users) =>
                 dynamicUser.followers ? (
-                  <div key={users._id}>
+                  <div key={users?._id}>
                     <img src={users?.profilePic} alt="followers" width="50" />
                     <br />
                     <Typography variant="h6" align="center">
