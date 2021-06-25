@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const SingleUser = (props) => {
-  const { user, authenticate, setUser } = props;
+  const { user, setUser } = props;
   const [dynamicUser, setDynamicUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const classes = useStyles();

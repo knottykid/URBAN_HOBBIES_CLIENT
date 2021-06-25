@@ -109,7 +109,6 @@ export default function App() {
           user={user}
           path={PATHS.SINGLE_USER}
           component={SingleUser}
-          authenticate={authenticate}
           setUser={setUser}
         />
         <ProtectedRoute
@@ -120,7 +119,13 @@ export default function App() {
           authenticate={authenticate}
         />
 
-        <NormalRoute exact path={PATHS.SINGLE_HOBBY} component={SingleHobby} />
+        <ProtectedRoute
+          exact
+          path={PATHS.SINGLE_HOBBY}
+          component={SingleHobby}
+          user={user}
+          authenticate={authenticate}
+        />
       </Switch>
     </div>
   );
