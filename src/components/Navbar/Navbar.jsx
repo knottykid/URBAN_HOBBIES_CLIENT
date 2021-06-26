@@ -75,7 +75,7 @@ const Navbar = (props) => {
           <Button
             className={classes.login}
             component={Link}
-            to="/auth/signup"
+            to="/auth/login"
             variant="contained"
             color="primary"
           >
