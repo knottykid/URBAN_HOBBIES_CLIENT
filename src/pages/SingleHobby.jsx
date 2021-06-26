@@ -78,8 +78,8 @@ const SingleHobby = (props) => {
       });
     return () => console.log("au revoir");
   }, []);
-  // console.log("ALLOW", allUser[0].hobbies[0]);
-  // console.log("COH", hobby.name);
+  console.log("ALLOW", allUser[0]?.hobbies.find);
+  console.log("COH", hobby.name);
   return (
     <Paper style={{ padding: "20px", borderRadius: "15px" }} elevation={6}>
       <div className={classes.card}>

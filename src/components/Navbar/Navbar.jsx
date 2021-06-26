@@ -29,7 +29,7 @@ const Navbar = (props) => {
       position="static"
       color="inherit"
     >
-      <Link to={PATHS.HOMEPAGE} className={classes.brandContainer}>
+      <Link to={PATHS.HOBBIES_PAGE} className={classes.brandContainer}>
         <img src="logo/Logo3.png" alt="urban hobbies logo" width="100" />
       </Link>
 
@@ -71,7 +71,7 @@ const Navbar = (props) => {
           <Button
             className={classes.login}
             component={Link}
-            to="/auth/login"
+            to="/auth/signup"
             variant="contained"
             color="primary"
           >

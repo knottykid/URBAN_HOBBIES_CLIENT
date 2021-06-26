@@ -4,7 +4,6 @@ import LoadingComponent from "../components/Loading";
 import Form from "../components/profile/Form";
 import {
   makeStyles,
-  Paper,
   Grid,
   Dialog,
   DialogTitle,
@@ -23,12 +22,12 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import DeleteProfile from "../components/profile/DeleteProfile";
 import PersonPinIcon from "@material-ui/icons/PersonPin";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
-import Popup from "../components/controls/Popup";
+// import Popup from "../components/controls/Popup";
 import Controls from "../components/controls/Controls";
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: 200,
-    height: 200,
+    width: 180,
+    height: 180,
     margin: theme.spacing(2),
     padding: theme.spacing(1),
     alignItems: "center",
@@ -41,15 +40,15 @@ const useStyles = makeStyles((theme) => ({
     // alignItems: "start",
     // justifyContent: "start",
   },
-  pageContent: {
-    margin: theme.spacing(2),
-    padding: theme.spacing(2),
-    // marginBottom: theme.spacing(5),
-    // paddingLeft: theme.spacing(50),
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#F6F7DA",
-  },
+  // pageContent: {
+  //   margin: theme.spacing(2),
+  //   padding: theme.spacing(2),
+  //   // marginBottom: theme.spacing(5),
+  //   // paddingLeft: theme.spacing(50),
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  //   backgroundColor: "#F6F7DA",
+  // },
   button: {
     margin: theme.spacing(1),
     // padding: theme.spacing(1),
