@@ -30,7 +30,11 @@ const Navbar = (props) => {
       color="inherit"
     >
       <Link to={PATHS.HOBBIES_PAGE} className={classes.brandContainer}>
-        <img src="logo/Logo3.png" alt="urban hobbies logo" width="100" />
+        <img
+          src="https://res.cloudinary.com/dzxo1mr9i/image/upload/v1624559819/urban-hobbies/cobdvsrkfnqtjwvsxszv.jpg"
+          alt="urban hobbies logo"
+          width="100"
+        />
       </Link>
 
       {/* <Button variant="outlined" color="primary" href="#outlined-buttons">
