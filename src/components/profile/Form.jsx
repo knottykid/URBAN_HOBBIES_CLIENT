@@ -16,11 +16,11 @@ const Form = (props) => {
   const { user, authenticate } = props;
   const initialValues = {
     username: user.username,
-    gender: "other" || user.gender,
+    gender: user.gender || "other",
     age: "" || user.age,
-    postalCode: "" || user.postalCode,
-    neighborhood: "" || user.neighborhood,
-    hobbies: [] || user.hobbies,
+    postalCode: user.postalCode || "",
+    neighborhood: user.neighborhood || "",
+    hobbies: user?.hobbies?.length ? user.hobbies : [],
   };
   const [newForm, setNewForm] = useState(initialValues);
 

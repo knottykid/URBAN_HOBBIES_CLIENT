@@ -44,7 +44,7 @@ const Follow = (props) => {
           return setError(response);
         }
         console.log("TELL ME", response);
-        setUser(response?.data?.user);
+        setUser(response?.data);
       })
       .catch((error) => {
         console.log("ERROR", error);
@@ -62,7 +62,7 @@ const Follow = (props) => {
       )
       .then((response) => {
         console.log("CALL?", response);
-        setUser(response.data.user);
+        //s setUser(response.data);
       })
       .catch((error) => {
         console.log(error);
