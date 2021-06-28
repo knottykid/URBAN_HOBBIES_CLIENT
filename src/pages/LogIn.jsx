@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { login } from "../services/auth";
+import { Link } from "react-router-dom";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import {
   makeStyles,
@@ -7,7 +8,6 @@ import {
   Typography,
   Box,
   Grid,
-  Link,
   TextField,
   CssBaseline,
   Button,
@@ -140,7 +140,7 @@ export default function LogIn({ authenticate, history }) {
             </Button>
             <Grid container>
               <Grid item>
-                <Link href="/auth/signup" variant="body2">
+                <Link to="/auth/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
@@ -151,13 +151,6 @@ export default function LogIn({ authenticate, history }) {
           <Copyright />
         </Box>
       </Container>
-
-      {error && (
-        <div className="error-block">
-          <p>There was an error submiting the form:</p>
-          <p>{error.message}</p>
-        </div>
-      )}
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { signup } from "../services/auth";
+import { Link } from "react-router-dom";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import {
   makeStyles,
@@ -7,16 +8,12 @@ import {
   Typography,
   Box,
   Grid,
-  Link,
   TextField,
   CssBaseline,
   Button,
   Avatar,
-  InputLabel,
-  Input,
   InputAdornment,
   IconButton,
-  Card,
 } from "@material-ui/core";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
@@ -233,7 +230,7 @@ export default function Signup({ authenticate, history }) {
             </Button>
             <Grid container justify="flex-end">
               <Grid item>
-                <Link href="/auth/login" variant="body2">
+                <Link to="/auth/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
@@ -244,13 +241,6 @@ export default function Signup({ authenticate, history }) {
           <Copyright />
         </Box>
       </Container>
-
-      {error && (
-        <div className="error-block">
-          <p>There was an error submitting the form:</p>
-          <p>{error.message}</p>
-        </div>
-      )}
     </div>
   );
 }
