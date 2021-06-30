@@ -38,12 +38,11 @@ const Follow = (props) => {
         { headers: { authorization: accessToken } }
       )
       .then((response) => {
-        console.log("|m|", response.data);
         setError(null);
         if (!response.status) {
           return setError(response);
         }
-        console.log("TELL ME", response);
+
         setUser(response?.data);
       })
       .catch((error) => {
@@ -61,7 +60,6 @@ const Follow = (props) => {
         { headers: { authorization: accessToken } }
       )
       .then((response) => {
-        console.log("CALL?", response);
         setUser(response.data);
       })
       .catch((error) => {
@@ -96,21 +94,8 @@ const Follow = (props) => {
           </Button>
         </form>
       )}
-
-      {/* <Button
-            variant="contained"
-            color="primary"
-            // onClick={followTheLeader}
-            startIcon={<PersonAddDisabledIcon />}
-          >
-            UnFollow
-          </Button>
-        {/* ) : ( */}
-      {/* */}
-      {/* )} */}
     </div>
   );
 };
-// };
 
 export default Follow;

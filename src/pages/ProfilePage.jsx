@@ -22,7 +22,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import DeleteProfile from "../components/profile/DeleteProfile";
 import PersonPinIcon from "@material-ui/icons/PersonPin";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
-// import Popup from "../components/controls/Popup";
+import Popup from "../components/Popup";
 import Controls from "../components/controls/Controls";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,22 +36,11 @@ const useStyles = makeStyles((theme) => ({
   card: {
     margin: theme.spacing(1),
     padding: theme.spacing(0),
-    // display: "flex",
-    // alignItems: "start",
-    // justifyContent: "start",
   },
-  // pageContent: {
-  //   margin: theme.spacing(2),
-  //   padding: theme.spacing(2),
-  //   // marginBottom: theme.spacing(5),
-  //   // paddingLeft: theme.spacing(50),
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  //   backgroundColor: "#F6F7DA",
-  // },
+
   button: {
     margin: theme.spacing(1),
-    // padding: theme.spacing(1),
+
     alignItems: "center",
     justifyContent: "center",
     textTransform: "none",
@@ -59,10 +48,17 @@ const useStyles = makeStyles((theme) => ({
   container: {
     backgroundColor: theme.palette.grey[100],
   },
+  cardContent: {
+    textAlign: " flex",
+  },
 }));
 export default function ProfilePage({ user, authenticate, setUser }) {
-  // const [displayUpdateProfile, setDisplayUpdateProfile] = useState(false);
   const [openPopup, setOpenPopup] = useState(false);
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
   const [isLoading, setIsLoading] = useState(false);
   const [picture, setPicture] = useState(false);
   const [deleteUser, setDeleteUser] = useState(false);
@@ -91,8 +87,6 @@ export default function ProfilePage({ user, authenticate, setUser }) {
   //  if there is no user, you should be redirected to /login
   // A "middleware" that is going to check if you are validated or not
   return (
-    // <div className={classes.root}>
-    // <Paper elevation={5} className={classes.pageContent}>
     <>
       <Container
         className={classes.container}
@@ -115,26 +109,26 @@ export default function ProfilePage({ user, authenticate, setUser }) {
         </Card>
         <Card className={classes.card}>
           <Grid container item s={12} xs={12} md={6} lg={6}>
-            <CardContent classes={classes.CardContent}>
+            <CardContent classes={classes.cardContent}>
               <Typography gutterBottom variant="h5" component="h2">
                 Welcome to your profile {user.username}
               </Typography>
-              <Typography variant="body1" color="textSecondary" component="b">
+              <Typography variant="h6" color="textSecondary" component="h5">
                 <h5>Age: {user.age}</h5>
               </Typography>
-              <Typography variant="body1" color="textSecondary" component="b">
+              <Typography variant="h6" color="textSecondary" component="h5">
                 <h5>Gender: {user.gender}</h5>
               </Typography>
-              <Typography variant="body1" color="textSecondary" component="b">
+              <Typography variant="h6" color="textSecondary" component="h5">
                 <h5>Hood: {user.neighborhood}</h5>
               </Typography>
-              <Typography variant="body1" color="textSecondary" component="b">
+              <Typography variant="h6" color="textSecondary" component="h5">
                 <h5>PLZ: {user.postalCode}</h5>
               </Typography>
-              <Typography variant="body1" color="textSecondary" component="b">
+              <Typography variant="h6" color="textSecondary" component="h5">
                 <h5> City: {user.location}</h5>
               </Typography>
-              <Typography variant="body1" color="textSecondary" component="b">
+              <Typography variant="h6" color="textSecondary" component="h5">
                 <h5> Hobbies:{user.hobbies?.join(", ")}</h5>
               </Typography>
             </CardContent>
@@ -152,7 +146,7 @@ export default function ProfilePage({ user, authenticate, setUser }) {
                 onClick={handleClickOpen}
                 startIcon={<PersonPinIcon />}
               >
-                Update
+                Hobbies & Hoods
               </Button>
 
               <Dialog
@@ -161,13 +155,20 @@ export default function ProfilePage({ user, authenticate, setUser }) {
                 maxWidth="md"
                 aria-labelledby="form-dialog-title"
               >
-                <DialogTitle id="form-dialog-title">Update</DialogTitle>
+                <DialogActions>
+                  <Controls.Button
+                    text="Close After Submit"
+                    onClick={handleClose}
+                    color="secondary"
+                  />
+                </DialogActions>
+                <DialogTitle id="form-dialog-title">
+                  Fill Out The Form
+                </DialogTitle>
+
                 <DialogContent divider>
                   <Form user={user} authenticate={authenticate} />
                 </DialogContent>
-                <DialogActions>
-                  <Controls.Button text="Close" onClick={handleClose} />
-                </DialogActions>
               </Dialog>
 
               <Button

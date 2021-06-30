@@ -28,7 +28,6 @@ const Form = (props) => {
     setNewForm(initialValues);
   };
   function handleChange(event) {
-    //  /console.log(">> " + event.target.name + ">>" + event.target.value);
     setNewForm({ ...newForm, [event.target.name]: event.target.value });
   }
 

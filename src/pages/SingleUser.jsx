@@ -56,9 +56,9 @@ const useStyles = makeStyles((theme) => ({
 
     margin: theme.spacing(2),
     paddingTop: theme.spacing(1),
-
-    // alignItems: "center",
-    // justifyContent: "center",
+  },
+  cardContent: {
+    textAlign: " flex",
   },
 }));
 const SingleUser = (props) => {
@@ -74,7 +74,6 @@ const SingleUser = (props) => {
         headers: { authorization: localStorage.getItem(CONST.ACCESS_TOKEN) },
       })
       .then((response) => {
-        console.log("RESPUESTA", response);
         setDynamicUser(response.data);
       })
       .catch((err) => {
@@ -107,7 +106,7 @@ const SingleUser = (props) => {
           <CardActionArea>
             <CardMedia
               component="img"
-              alt="user Pic"
+              alt="userPic"
               width="10%"
               image={dynamicUser.profilePic}
               title={dynamicUser.name}
@@ -116,7 +115,7 @@ const SingleUser = (props) => {
         </Card>
         <Card className={classes.card}>
           <Grid container item s={12} xs={12} md={6} lg={6}>
-            <CardContent classes={classes.CardContent}>
+            <CardContent classes={classes.cardContent}>
               <Typography gutterBottom variant="h5" component="h2">
                 {dynamicUser.username}
               </Typography>

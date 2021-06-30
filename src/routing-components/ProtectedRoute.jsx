@@ -11,7 +11,7 @@ const ProtectedRoute = ({
   ...componentProps
 }) => {
   const Component = component;
-  console.log("user ", user);
+
   if (!user) {
     return <Redirect to={PATHS.LOGINPAGE} />;
   }
