@@ -2,27 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import * as PATHS from "../../utils/paths";
 import * as CONST from "../../utils/consts";
-import * as USER_SERVICE from "../../services/user";
+
 import PersonAddDisabledIcon from "@material-ui/icons/PersonAddDisabled";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import { Button, makeStyles } from "@material-ui/core";
-import { green, orange } from "@material-ui/core/colors";
-const useStyles = makeStyles((theme) => ({
-  root: {
-    margin: theme.spacing(0, 5),
-    textTransform: "none",
+import { Button } from "@material-ui/core";
 
-    backgroundColor: green[500],
-  },
-  unFollow: {
-    textTransform: "none",
-
-    backgroundColor: orange[500],
-  },
-}));
+import useStyles from "./styles";
 
 const Follow = (props) => {
-  console.log("SEE:", props);
   const { userId, user, setUser } = props;
   const [error, setError] = useState(null);
   const [follow, setFollow] = useState([]);
@@ -84,7 +71,7 @@ const Follow = (props) => {
       ) : (
         <form onSubmit={handleFollow}>
           <Button
-            className={classes.root}
+            className={classes.follow}
             variant="contained"
             color="primary"
             type="submit"

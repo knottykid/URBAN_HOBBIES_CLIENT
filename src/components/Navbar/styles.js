@@ -3,7 +3,7 @@ import { blue, green, lightGreen, red } from "@material-ui/core/colors";
 
 export default makeStyles((theme) => ({
   appBar: {
-    borderRadius: 5,
+    borderRadius: 10,
     margin: "10px 0",
     display: "flex",
     flexDirection: "row",

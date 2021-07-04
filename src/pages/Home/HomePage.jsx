@@ -1,59 +1,14 @@
 import React, { useState, useEffect } from "react";
-import {
-  makeStyles,
-  CssBaseline,
-  Typography,
-  Button,
-  Collapse,
-} from "@material-ui/core";
+import { CssBaseline, Typography, Button, Collapse } from "@material-ui/core";
 import CollectionsIcon from "@material-ui/icons/Collections";
 import TagFacesIcon from "@material-ui/icons/TagFaces";
-import HobbiesPage from "./HobbiesPage";
 import { Link } from "react-router-dom";
-import { green } from "@material-ui/core/colors";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    minHeight: "100vh",
-    backgroundImage: `url(${process.env.PUBLIC_URL + "/logo/brln.png"})`,
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    backgroundPosition: "fixed",
-    backgroundColor: "rgba(11, 156, 49, 0.4)",
-    backgroundBlendMode: "darken",
-  },
-  text: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100vh",
-    fontFamily: "Nunito",
-  },
-  icon: {
-    color: "#fff",
-    fontSize: "2rem",
-  },
-  colorText: {
-    color: "#0b4e10",
-  },
-  container: {
-    textAlign: "center",
-  },
-  title: {
-    color: "#fff",
-    fontSize: "4.5rem",
-  },
-  button: {
-    margin: theme.spacing(0, 5),
-    textTransform: "none",
-
-    backgroundColor: green[500],
-  },
-}));
+import useStyles from "./styles";
 
 function HomePage() {
   const [checked, setChecked] = useState(false);
   const classes = useStyles();
+
   useEffect(() => {
     setChecked(true);
   }, []);

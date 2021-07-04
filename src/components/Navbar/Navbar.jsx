@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-
 import * as PATHS from "../../utils/paths";
-import * as CONSTS from "../../utils/consts";
 import { green } from "@material-ui/core/colors";
 import {
   AppBar,
@@ -15,11 +13,8 @@ import {
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import PeopleIcon from "@material-ui/icons/People";
 import useStyles from "./styles";
-import UserPage from "../../pages/UserPage";
 
-const Navbar = (props) => {
-  const [noUser, setNoUser] = useState(false);
-  const { user, authenticate, setUser } = props;
+const Navbar = ({ user, authenticate, setUser, handleLogout }) => {
   const classes = useStyles();
 
   return (
@@ -37,35 +32,32 @@ const Navbar = (props) => {
         />
       </Link>
 
-      {/* <Button variant="outlined" color="primary" href="#outlined-buttons">
-        <Link to={PATHS.USER}>Urbbies</Link>
-      </Button> */}
       <Toolbar className={classes.toolbar}>
-        {props.user ? (
+        {user?._id ? (
           <div className={classes.profile}>
-            <IconButton label="Urbbies" href="/users">
+            <IconButton label="Urbbies" component={Link} to="/users">
               <PeopleIcon fontSize="large" style={{ color: green[400] }} />
               Urbbies
             </IconButton>
 
             <Avatar
               className={classes.green}
-              alt={props.user?.username}
-              src={props.user?.profilePic}
+              alt={user.username}
+              src={user.profilePic}
               component={Link}
               to="/profile"
             >
-              {props.user?.username.charAt(0)}
+              {user.username.charAt(0)}
             </Avatar>
             <Typography className={classes.userName} variant="h6">
-              {props.user?.name}
+              {user.name}
             </Typography>
 
             <Button
               variant="contained"
               className={classes.logout}
               color="secondary"
-              onClick={props.handleLogout}
+              onClick={handleLogout}
               startIcon={<ExitToAppIcon />}
             >
               Logout

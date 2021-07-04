@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import * as CONST from "../utils/consts";
-import * as PATHS from "../utils/paths";
+import * as CONST from "../../utils/consts";
+import * as PATHS from "../../utils/paths";
 import {
   Divider,
   Grid,
@@ -15,21 +15,7 @@ import {
 } from "@material-ui/core";
 
 import Avatar from "@material-ui/core/Avatar";
-import { makeStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-    maxWidth: "36ch",
-    backgroundColor: theme.palette.background.paper,
-  },
-  inline: {
-    display: "inline",
-  },
-  container: {
-    backgroundColor: theme.palette.grey[100],
-  },
-}));
+import useStyles from "./styles";
 
 const UserPage = (props) => {
   const { user, setUser, authenticate } = props;
@@ -56,7 +42,7 @@ const UserPage = (props) => {
       {allUser.map((users) =>
         (user.neighborhood === users.neighborhood && user._id !== users._id) ||
         (user.hobbies === users.hobbies && user._id !== users._id) ? (
-          <div>
+          <div key={users._id}>
             {" "}
             <Container
               className={classes.container}
@@ -66,7 +52,7 @@ const UserPage = (props) => {
               md={3}
               lg={3}
             >
-              <Grid key={users._id} item xs={12} sm={12} md={3} lg={3}>
+              <Grid item xs={12} sm={12} md={3} lg={3}>
                 <List className={classes.root}>
                   <ListItem alignItems="flex-start">
                     <ListItemAvatar>

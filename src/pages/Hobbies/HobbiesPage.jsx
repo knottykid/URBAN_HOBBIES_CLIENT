@@ -1,19 +1,13 @@
 import React, { useState, useEffect } from "react";
 
 import axios from "axios";
-import {
-  ButtonBase,
-  Card,
-  CardMedia,
-  Grid,
-  Typography,
-} from "@material-ui/core";
+import { ButtonBase, Card, CardMedia, Grid } from "@material-ui/core";
 
 import { Link } from "react-router-dom";
-import * as PATHS from "../utils/paths";
-import * as CONST from "../utils/consts";
+import * as PATHS from "../../utils/paths";
+import * as CONST from "../../utils/consts";
 
-import useStyles from "../components/hobbies/styles";
+import useStyles from "./styles";
 
 const HobbiesPage = ({ user }) => {
   const [listOfHobbies, setListOfHobbies] = useState([]);

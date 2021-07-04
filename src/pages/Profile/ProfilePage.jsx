@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import UploadPic from "../components/profile/UploadPic";
-import LoadingComponent from "../components/Loading";
-import Form from "../components/profile/Form";
+import UploadPic from "../../components/profile/UploadPic";
+import LoadingComponent from "../../components/Loading";
+import Form from "../../components/profile/Form";
 import {
-  makeStyles,
   Grid,
   Dialog,
   DialogTitle,
@@ -19,39 +18,13 @@ import {
   Container,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
-import DeleteProfile from "../components/profile/DeleteProfile";
+import DeleteProfile from "../../components/profile/DeleteProfile";
 import PersonPinIcon from "@material-ui/icons/PersonPin";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
-import Popup from "../components/Popup";
-import Controls from "../components/controls/Controls";
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: 180,
-    height: 180,
-    margin: theme.spacing(2),
-    padding: theme.spacing(1),
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  card: {
-    margin: theme.spacing(1),
-    padding: theme.spacing(0),
-  },
+import Popup from "../../components/Popup";
+import Controls from "../../components/controls/Controls";
+import useStyles from "./styles";
 
-  button: {
-    margin: theme.spacing(1),
-
-    alignItems: "center",
-    justifyContent: "center",
-    textTransform: "none",
-  },
-  container: {
-    backgroundColor: theme.palette.grey[100],
-  },
-  cardContent: {
-    textAlign: " flex",
-  },
-}));
 export default function ProfilePage({ user, authenticate, setUser }) {
   const [openPopup, setOpenPopup] = useState(false);
   const [notify, setNotify] = useState({

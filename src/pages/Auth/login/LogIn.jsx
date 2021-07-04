@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { login } from "../services/auth";
+import { login } from "../../../services/auth";
 import { Link } from "react-router-dom";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import {
@@ -15,9 +15,10 @@ import {
   FormControlLabel,
   Checkbox,
 } from "@material-ui/core";
-import "./Signup";
-import * as CONSTS from "../utils/consts";
-import * as PATHS from "../utils/paths";
+import "../signup/Signup";
+import * as CONSTS from "../../../utils/consts";
+import * as PATHS from "../../../utils/paths";
+import useStyles from "./styles";
 
 function Copyright() {
   return (
@@ -31,29 +32,6 @@ function Copyright() {
     </Typography>
   );
 }
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  container: {
-    backgroundColor: theme.palette.grey[100],
-  },
-}));
 
 export default function LogIn({ authenticate, history }) {
   const classes = useStyles();

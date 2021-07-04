@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { signup } from "../services/auth";
+import { signup } from "../../../services/auth";
 import { Link } from "react-router-dom";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import {
-  makeStyles,
   Container,
   Typography,
   Box,
@@ -17,9 +16,10 @@ import {
 } from "@material-ui/core";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import useStyles from "./styles";
 
-import * as CONSTS from "../utils/consts";
-import * as PATHS from "../utils/paths";
+import * as CONSTS from "../../../utils/consts";
+import * as PATHS from "../../../utils/paths";
 
 function Copyright() {
   return (
@@ -33,29 +33,6 @@ function Copyright() {
     </Typography>
   );
 }
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  container: {
-    backgroundColor: theme.palette.grey[100],
-  },
-}));
 
 export default function Signup({ authenticate, history }) {
   const [form, setForm] = useState({

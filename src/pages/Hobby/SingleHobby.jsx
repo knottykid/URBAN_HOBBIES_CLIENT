@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import * as CONST from "../utils/consts";
-import * as HOBBIES_SERVICE from "../services/hobbies";
+import * as CONST from "../../utils/consts";
+import * as HOBBIES_SERVICE from "../../services/hobbies";
 import { Link } from "react-router-dom";
-import * as PATHS from "../utils/paths";
+import * as PATHS from "../../utils/paths";
 import {
   Paper,
   Typography,
-  makeStyles,
   Grid,
   ListItemText,
   List,
@@ -15,43 +14,13 @@ import {
   Avatar,
   ListItemAvatar,
 } from "@material-ui/core";
+import useStyles from "./styles";
 
-const useStyles = makeStyles((theme) => ({
-  media: {
-    borderRadius: "20px",
-    objectFit: "cover",
-    width: "100%",
-    maxHeight: "600px",
-  },
-  card: {
-    display: "flex",
-    width: "100%",
-    [theme.breakpoints.down("sm")]: {
-      flexWrap: "wrap",
-      flexDirection: "column",
-    },
-  },
-  section: {
-    borderRadius: "20px",
-    margin: "10px",
-    flex: 1,
-  },
-  imageSection: {
-    marginLeft: "20px",
-    [theme.breakpoints.down("sm")]: {
-      marginLeft: 0,
-    },
-  },
-}));
 const SingleHobby = (props) => {
   const { user, setUser, authenticate } = props;
   const [hobby, setHobby] = useState({});
   const [allUser, setAllUser] = useState([]);
   const classes = useStyles();
-
-  //   const showHobby = (hob) => {
-  //     setHobby(hob);
-  //   };
 
   useEffect(() => {
     axios

@@ -3,22 +3,22 @@ import "./App.css";
 import { Switch } from "react-router-dom";
 import LoadingComponent from "./components/Loading";
 import Navbar from "./components/Navbar/Navbar";
-import HomePage from "./pages/HomePage";
-import LogIn from "./pages/LogIn";
+import HomePage from "./pages/Home/HomePage";
+import LogIn from "./pages/Auth/login/LogIn";
 
-import HobbiesPage from "./pages/HobbiesPage";
-import Signup from "./pages/Signup";
+import HobbiesPage from "./pages/Hobbies/HobbiesPage";
+import Signup from "./pages/Auth/signup/Signup";
 
 import NormalRoute from "./routing-components/NormalRoute";
 import ProtectedRoute from "./routing-components/ProtectedRoute";
-import ProfilePage from "./pages/ProfilePage";
+import ProfilePage from "./pages/Profile/ProfilePage";
 import { getLoggedIn, logout } from "./services/auth";
 import * as PATHS from "./utils/paths";
 import * as CONSTS from "./utils/consts";
-import SingleHobby from "./pages/SingleHobby";
+import SingleHobby from "./pages/Hobby/SingleHobby";
 
-import UserPage from "./pages/UserPage";
-import SingleUser from "./pages/SingleUser";
+import UserPage from "./pages/Users/UserPage";
+import SingleUser from "./pages/User/SingleUser";
 import Messenger from "./pages/messenger/Messenger";
 
 export default function App() {
