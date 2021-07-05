@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import * as PROFILE_SERVICE from "../../services/profile";
 import * as CONSTS from "../../utils/consts";
 import Controls from "../controls/Controls";
+import Success from "../success/Success";
 
 import { useForm, ProForm } from "../forms/useForm";
 import * as neighborhoods from "../../services/neighborhoods";
@@ -23,6 +24,8 @@ const Form = (props) => {
     hobbies: user?.hobbies?.length ? user.hobbies : [],
   };
   const [newForm, setNewForm] = useState(initialValues);
+  const [successForm, setSuccessForm] = useState(false);
+  const [message, setMessage] = useState("");
 
   const resetForm = () => {
     setNewForm(initialValues);
@@ -37,69 +40,78 @@ const Form = (props) => {
     PROFILE_SERVICE.UPDATE_PROFILE(newForm, accessToken)
       .then((response) => {
         authenticate(response.data.user);
+        setSuccessForm(true);
       })
       .catch((err) => {
         console.error(err);
       });
+    setSuccessForm(false);
     resetForm();
   }
 
   return (
-    <ProForm onSubmit={handleSubmit}>
-      <Grid container>
-        <Grid item xs={6}>
-          <Controls.Input
-            name="username"
-            label="username"
-            value={newForm.username}
-            onChange={handleChange}
-            // error={errors.userName}
-          />
+    <>
+      <ProForm onSubmit={handleSubmit}>
+        <Grid container>
+          <Grid item xs={6}>
+            <Controls.Input
+              name="username"
+              label="username"
+              value={newForm.username}
+              onChange={handleChange}
+              // error={errors.userName}
+            />
 
-          <Controls.Input
-            name="age"
-            label="Age"
-            value={newForm.age}
-            onChange={handleChange}
-          />
-          <Controls.RadioGroup
-            name="gender"
-            label="Gender"
-            value={newForm.gender}
-            onChange={handleChange}
-            items={genderItems}
-          />
-          <Controls.Select
-            name="neighborhood"
-            label="Neighborhood"
-            value={newForm.neighborhood}
-            onChange={handleChange}
-            options={neighborhoods.getNeighborhoods()}
-            // error={errors.neighborhood}
-          />
-          <Controls.Input
-            name="postalCode"
-            label="Postal Code"
-            value={newForm.postalCode}
-            onChange={handleChange}
-          />
+            <Controls.Input
+              name="age"
+              label="Age"
+              value={newForm.age}
+              onChange={handleChange}
+            />
+            <Controls.RadioGroup
+              name="gender"
+              label="Gender"
+              value={newForm.gender}
+              onChange={handleChange}
+              items={genderItems}
+            />
+            <Controls.Select
+              name="neighborhood"
+              label="Neighborhood"
+              value={newForm.neighborhood}
+              onChange={handleChange}
+              options={neighborhoods.getNeighborhoods()}
+              // error={errors.neighborhood}
+            />
+            <Controls.Input
+              name="postalCode"
+              label="Postal Code"
+              value={newForm.postalCode}
+              onChange={handleChange}
+            />
 
-          <Controls.AutoComplete
-            name="hobbies"
-            label="Hobbies"
-            value={newForm.hobbies}
-            onChange={(e) => setNewForm({ ...newForm, hobbies: e })}
+            <Controls.AutoComplete
+              name="hobbies"
+              label="Hobbies"
+              value={newForm.hobbies}
+              onChange={(e) => setNewForm({ ...newForm, hobbies: e })}
 
-            // error={errors.hobbies}
-          />
+              // error={errors.hobbies}
+            />
 
-          <div>
-            <Controls.Button type="submit" text="Submit" />
-            <Controls.Button text="Reset" color="default" onClick={resetForm} />
-          </div>
+            <div>
+              <Controls.Button type="submit" text="Submit" />
+              <Controls.Button
+                text="Reset"
+                color="default"
+                onClick={resetForm}
+              />
+            </div>
+          </Grid>
         </Grid>
-      </Grid>
-    </ProForm>
+      </ProForm>
+      {successForm ? <Success message={message} /> : ""}
+    </>
   );
 };
 

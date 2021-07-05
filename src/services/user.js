@@ -16,3 +16,8 @@ export function FOLLOW_USER(body, token) {
     authorization: token,
   });
 }
+export function UNFOLLOW_USER(body, token) {
+  return userService.put("/:userId/unfollow", body, {
+    authorization: token,
+  });
+}

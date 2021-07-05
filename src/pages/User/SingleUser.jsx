@@ -18,7 +18,6 @@ import {
   ListItemAvatar,
   Avatar,
   ListItemText,
-  CssBaseline,
 } from "@material-ui/core";
 import useStyles from "./styles";
 
@@ -48,10 +47,9 @@ const SingleUser = (props) => {
   if (isLoading) {
     return <LoadingComponent />;
   }
-
+  console.log("DYNAMIC", dynamicUser);
   return (
     <div>
-      <CssBaseline />
       <Container
         className={classes.container}
         component="main"

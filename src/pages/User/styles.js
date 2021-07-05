@@ -11,8 +11,8 @@ export default makeStyles((theme) => ({
     justifyContent: "center",
   },
   card: {
-    margin: theme.spacing(2),
-    padding: theme.spacing(2),
+    margin: theme.spacing(1),
+    padding: theme.spacing(0),
   },
   container: {
     backgroundColor: theme.palette.grey[100],

@@ -33,7 +33,7 @@ const Navbar = ({ user, authenticate, setUser, handleLogout }) => {
       </Link>
 
       <Toolbar className={classes.toolbar}>
-        {user?._id ? (
+        {user ? (
           <div className={classes.profile}>
             <IconButton label="Urbbies" component={Link} to="/users">
               <PeopleIcon fontSize="large" style={{ color: green[400] }} />

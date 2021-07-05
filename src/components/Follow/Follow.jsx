@@ -9,8 +9,7 @@ import { Button } from "@material-ui/core";
 
 import useStyles from "./styles";
 
-const Follow = (props) => {
-  const { userId, user, setUser } = props;
+const Follow = ({ userId, user, setUser }) => {
   const [error, setError] = useState(null);
   const [follow, setFollow] = useState([]);
   const classes = useStyles();
@@ -25,6 +24,7 @@ const Follow = (props) => {
         { headers: { authorization: accessToken } }
       )
       .then((response) => {
+        console.log("BASH", response);
         setError(null);
         if (!response.status) {
           return setError(response);
@@ -47,6 +47,11 @@ const Follow = (props) => {
         { headers: { authorization: accessToken } }
       )
       .then((response) => {
+        console.log("KM", response);
+        setError(null);
+        if (!response.status) {
+          return setError(response);
+        }
         setUser(response.data);
       })
       .catch((error) => {
