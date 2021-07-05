@@ -3,7 +3,7 @@ import axios from "axios";
 import * as CONST from "../../utils/consts";
 import { Link } from "react-router-dom";
 import * as PATHS from "../../utils/paths";
-import Follow from "../../components/users/Follow";
+import Follow from "../../components/Follow/Follow";
 import LoadingComponent from "../../components/Loading";
 import {
   Card,
