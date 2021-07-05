@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,7 +48,7 @@ const UploadPic = ({ user, setUser }) => {
           color="primary"
           type="submit"
         >
-          Push
+          Hit me!
         </Button>
       </form>
     </div>

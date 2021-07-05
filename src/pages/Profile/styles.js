@@ -27,4 +27,7 @@ export default makeStyles((theme) => ({
   cardContent: {
     textAlign: " flex",
   },
+  text: {
+    textAlign: "start",
+  },
 }));

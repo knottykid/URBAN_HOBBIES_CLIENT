@@ -47,7 +47,7 @@ const Follow = ({ userId, user, setUser }) => {
         { headers: { authorization: accessToken } }
       )
       .then((response) => {
-        console.log("KM", response);
+        console.log("Are you?", response);
         setError(null);
         if (!response.status) {
           return setError(response);

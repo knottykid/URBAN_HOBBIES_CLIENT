@@ -75,25 +75,60 @@ const SingleUser = (props) => {
         <Card className={classes.card}>
           <Grid container item s={12} xs={12} md={6} lg={6}>
             <CardContent classes={classes.cardContent}>
-              <Typography gutterBottom variant="h5" component="h2">
+              <Typography
+                gutterBottom
+                className={classes.text}
+                variant="h5"
+                component="h2"
+              >
                 {dynamicUser.username}
               </Typography>
-              <Typography variant="h6" color="textSecondary" component="h6">
+              <Typography
+                className={classes.text}
+                variant="h6"
+                color="textSecondary"
+                component="h6"
+              >
                 Age: {dynamicUser.age}
               </Typography>
-              <Typography variant="h6" color="textSecondary" component="h6">
+              <Typography
+                className={classes.text}
+                variant="h6"
+                color="textSecondary"
+                component="h6"
+              >
                 Gender: {dynamicUser.gender}
               </Typography>
-              <Typography variant="h6" color="textSecondary" component="h6">
+              <Typography
+                className={classes.text}
+                variant="h6"
+                color="textSecondary"
+                component="h6"
+              >
                 Hood: {dynamicUser.neighborhood}
               </Typography>
-              <Typography variant="h6" color="textSecondary" component="h6">
+              <Typography
+                className={classes.text}
+                variant="h6"
+                color="textSecondary"
+                component="h6"
+              >
                 PLZ: {dynamicUser.postalCode}
               </Typography>
-              <Typography variant="h6" color="textSecondary" component="h6">
+              <Typography
+                className={classes.text}
+                variant="h6"
+                color="textSecondary"
+                component="h6"
+              >
                 City: {dynamicUser.location}
               </Typography>
-              <Typography variant="h6" color="textSecondary" component="h6">
+              <Typography
+                className={classes.text}
+                variant="h6"
+                color="textSecondary"
+                component="h6"
+              >
                 Hobbies: {dynamicUser.hobbies?.join(", ")}
               </Typography>
               <div className={classes.avatar}>

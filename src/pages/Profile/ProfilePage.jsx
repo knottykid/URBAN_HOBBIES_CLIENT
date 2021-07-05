@@ -84,24 +84,67 @@ export default function ProfilePage({ user, authenticate, setUser }) {
           <Grid container item s={12} xs={12} md={6} lg={6}>
             <CardContent classes={classes.cardContent}>
               <Typography gutterBottom variant="h5" component="h2">
-                Welcome to your profile {user.username}
+                Welcome to your profile {user.username}.{" "}
+                <span>
+                  <p
+                    style={{
+                      fontSize: "15px",
+                      color: "green",
+                      display: "flex",
+                      textAlign: "start",
+                    }}
+                  >
+                    Click the button below to select a Hobby or Two, and don't
+                    forget the Hood.
+                  </p>
+                </span>
               </Typography>
-              <Typography variant="h6" color="textSecondary" component="h5">
+              <Typography
+                className={classes.text}
+                variant="h6"
+                color="textSecondary"
+                component="h5"
+              >
                 <h5>Age: {user.age}</h5>
               </Typography>
-              <Typography variant="h6" color="textSecondary" component="h5">
+              <Typography
+                className={classes.text}
+                variant="h6"
+                color="textSecondary"
+                component="h5"
+              >
                 <h5>Gender: {user.gender}</h5>
               </Typography>
-              <Typography variant="h6" color="textSecondary" component="h5">
+              <Typography
+                className={classes.text}
+                variant="h6"
+                color="textSecondary"
+                component="h5"
+              >
                 <h5>Hood: {user.neighborhood}</h5>
               </Typography>
-              <Typography variant="h6" color="textSecondary" component="h5">
+              <Typography
+                className={classes.text}
+                variant="h6"
+                color="textSecondary"
+                component="h5"
+              >
                 <h5>PLZ: {user.postalCode}</h5>
               </Typography>
-              <Typography variant="h6" color="textSecondary" component="h5">
+              <Typography
+                className={classes.text}
+                variant="h6"
+                color="textSecondary"
+                component="h5"
+              >
                 <h5> City: {user.location}</h5>
               </Typography>
-              <Typography variant="h6" color="textSecondary" component="h5">
+              <Typography
+                className={classes.text}
+                variant="h6"
+                color="textSecondary"
+                component="h5"
+              >
                 <h5> Hobbies:{user.hobbies?.join(", ")}</h5>
               </Typography>
             </CardContent>
