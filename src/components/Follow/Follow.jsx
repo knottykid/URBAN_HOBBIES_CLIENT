@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import * as PATHS from "../../utils/paths";
 import * as CONST from "../../utils/consts";
@@ -11,81 +11,81 @@ import useStyles from "./styles";
 
 const Follow = ({ userId, user, setUser }) => {
   const [error, setError] = useState(null);
-  const [follow, setFollow] = useState([]);
+
   const classes = useStyles();
 
-  const handleFollow = (e) => {
-    e.preventDefault();
-    const accessToken = localStorage.getItem(CONST.ACCESS_TOKEN);
-    axios
-      .put(
-        `${CONST.SERVER_URL}${PATHS.USER}/${userId}${PATHS.FOLLOW_USER}`,
-        { user },
-        { headers: { authorization: accessToken } }
-      )
-      .then((response) => {
-        console.log("BASH", response);
-        setError(null);
-        if (!response.status) {
-          return setError(response);
-        }
+  const handleFollow = () => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const accessToken = localStorage.getItem(CONST.ACCESS_TOKEN);
+        const url = `${CONST.SERVER_URL}${PATHS.USER}/${userId}${PATHS.FOLLOW_USER}`;
+        const response = await axios.put(
+          url,
+          { user },
+          { headers: { authorization: accessToken } }
+        );
 
-        setUser(response?.data);
-      })
-      .catch((error) => {
-        console.log("ERROR", error);
-      });
-  };
-
-  const handleUnFollow = (e) => {
-    e.preventDefault();
-    const accessToken = localStorage.getItem(CONST.ACCESS_TOKEN);
-    axios
-      .put(
-        `${CONST.SERVER_URL}${PATHS.USER}/${userId}${PATHS.UNFOLLOW_USER}`,
-        { user },
-        { headers: { authorization: accessToken } }
-      )
-      .then((response) => {
-        console.log("Are you?", response);
         setError(null);
-        if (!response.status) {
-          return setError(response);
-        }
+        if (!response.status) throw response;
+
         setUser(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        resolve();
+      } catch (err) {
+        setError(err.response.data);
+        console.log("ERROR", err);
+        reject(err);
+      }
+    });
   };
 
+  // try catch blocks are easier to troubleshoot with promises
+  const handleUnFollow = () => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const accessToken = localStorage.getItem(CONST.ACCESS_TOKEN);
+        const url = `${CONST.SERVER_URL}${PATHS.USER}/${userId}${PATHS.UNFOLLOW_USER}`;
+        const response = await axios.put(
+          url,
+          { user },
+          { headers: { authorization: accessToken } }
+        );
+
+        if (!response.status) throw response;
+
+        setError(null);
+        setUser(response.data);
+        resolve();
+      } catch (err) {
+        console.error(err);
+        setError(err.response.data);
+        reject(err);
+      }
+    });
+  };
+
+  const hasUserId = user.following[0] === userId;
   return (
     <div>
-      {user.following[0] === userId ? (
-        <form onSubmit={handleUnFollow}>
-          <Button
-            className={classes.unFollow}
-            variant="contained"
-            color="secondary"
-            type="submit"
-            startIcon={<PersonAddDisabledIcon />}
-          >
-            UnFollow
-          </Button>
-        </form>
-      ) : (
-        <form onSubmit={handleFollow}>
-          <Button
-            className={classes.follow}
-            variant="contained"
-            color="primary"
-            type="submit"
-            startIcon={<PersonAddIcon />}
-          >
-            Follow
-          </Button>
-        </form>
-      )}
+      <form
+        onSubmit={async (e) => {
+          e.preventDefault();
+          if (hasUserId) {
+            await handleUnFollow();
+          } else {
+            await handleFollow();
+          }
+        }}
+      >
+        <Button
+          className={hasUserId ? classes.unFollow : classes.follow}
+          variant="contained"
+          color={hasUserId ? "secondary" : "primary"}
+          type="submit"
+          startIcon={hasUserId ? <PersonAddDisabledIcon /> : <PersonAddIcon />}
+        >
+          {hasUserId ? "UnFollow" : "Follow"}
+        </Button>
+      </form>
     </div>
   );
 };

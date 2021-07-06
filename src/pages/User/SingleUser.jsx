@@ -28,26 +28,58 @@ const SingleUser = (props) => {
   const classes = useStyles();
 
   useEffect(() => {
-    setIsLoading(true);
-    axios
-      .get(`${CONST.SERVER_URL}/users/${props.match.params.userId}`, {
-        headers: { authorization: localStorage.getItem(CONST.ACCESS_TOKEN) },
-      })
-      .then((response) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        setIsLoading(true);
+        const url = `${CONST.SERVER_URL}/users/${props.match.params.userId}`;
+        const headers = {
+          authorization: localStorage.getItem(CONST.ACCESS_TOKEN),
+        };
+        const response = await axios.get(url, { headers });
         setDynamicUser(response.data);
-      })
-      .catch((err) => {
-        console.log(err.response);
-      })
-      .finally(() => {
         setIsLoading(false);
-      });
+        resolve();
+      } catch (err) {
+        console.log(err.response.data);
+        reject(err);
+      }
+    });
+    // im not sure what this part does, since useEffect is never called
+    // however using promises is much easier to troubleshoot bugged out code
   }, [props.match.params.userId]);
 
   if (isLoading) {
     return <LoadingComponent />;
   }
   console.log("DYNAMIC", dynamicUser);
+
+  // const SingleUser = (props) => {
+  //   const { user, setUser } = props;
+  //   const [dynamicUser, setDynamicUser] = useState({});
+  //   const [isLoading, setIsLoading] = useState(true);
+  //   const classes = useStyles();
+
+  //   useEffect(() => {
+  //     setIsLoading(true);
+  //     axios
+  //       .get(`${CONST.SERVER_URL}/users/${props.match.params.userId}`, {
+  //         headers: { authorization: localStorage.getItem(CONST.ACCESS_TOKEN) },
+  //       })
+  //       .then((response) => {
+  //         setDynamicUser(response.data);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err.response);
+  //       })
+  //       .finally(() => {
+  //         setIsLoading(false);
+  //       });
+  //   }, [props.match.params.userId]);
+
+  //   if (isLoading) {
+  //     return <LoadingComponent />;
+  //   }
+  //   console.log("DYNAMIC", dynamicUser);
   return (
     <div>
       <Container
